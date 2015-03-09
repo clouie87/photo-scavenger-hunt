@@ -1,0 +1,22 @@
+<ion-view view-title="Camera">
+    <ion-content>
+        <div class="list card">
+            <div class="item item-divider">Take a Photo!</div>
+            <div class="item item-body">
+                <div>
+                    <button type="button" class="button button-block button-positive" ng-click="takePhoto()">
+                        Take a Photo!
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="list card">
+            <div class="item item-divider">Your Photo</div>
+            <div class="item item-body">
+                <div class="your-photo" style="width:300px;height:300px;border:1px solid #000;">
+                    <image src="{{imageURI}}" style="width:300px;height:300px;" />
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>
