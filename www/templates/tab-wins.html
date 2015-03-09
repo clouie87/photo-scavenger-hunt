@@ -1,28 +1,40 @@
 <ion-view view-title="Winners">
     <ion-content>
-        <div class="list card">
-            <div class="item item-divider">The Winners</div>
-            <div class="item item-body">
-                <div>
-                    This will be a picture card <b>of winner!</b>
-                </div>
+        <ion-item class="list card" style="padding: 3px !important" ng-controller="WinsCtrl" ng-repeat="photo in photos" type="item-text-wrap" href="#/tab/photo/{{photo.id}}" >
+
+            <div class="item item-divider">
+                <h2>{{photo.description}}</h2>
+                <!--<p>Nine Inch Nails</p>-->
             </div>
-        </div>
-        <div class="list card">
-            <div class="item item-divider">Best Tree</div>
-            <div class="item item-body">
-                <div>
-                    This will be a picture card <b>of winner!</b>
-                </div>
+
+            <div class="item item-image">
+                <img src="http://clouie.ca/{{photo.filepath}}">
             </div>
-        </div>
-        <div class="list card">
-            <div class="item item-divider">Most Colorful Door</div>
-            <div class="item item-body">
-                <div>
-                    This will be a picture card <b>of winner!</b>
-                </div>
+
+
+            <div class="item item-divider">
+                <i class="icon ion-ios-star">  {{photo.id}}</i>
+                <!--this will become photo.stars-->
+
+                <!--<p>Nine Inch Nails</p>-->
             </div>
-        </div>
+
+
+
+            <!--<a class="item item-icon-left assertive" href="#">-->
+                <!--<i class="icon ion-music-note"></i>-->
+                <!--Start listening-->
+            <!--</a>-->
+
+
+        <!--<ion-item class="item-light left" style="padding: 3px !important" ng-controller="WinsCtrl" ng-repeat="photo in photos" type="item-text-wrap" href="#/tab/photo/{{photo.id}}" >-->
+
+
+            <!--<div class="item item-thumbnail" style="padding: 0">-->
+                <!--<img class="thumbnail" ng-src="http://clouie.ca/{{photo.filepath}}"/>-->
+                <!--&lt;!&ndash;<div>{{photo.id}} photo.id</div>&ndash;&gt;-->
+            <!--</div>-->
+
+        </ion-item>
     </ion-content>
 </ion-view>

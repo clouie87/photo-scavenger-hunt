@@ -17,6 +17,15 @@ $dark:                            #444 !default;
 .challenge {
   max-width: 75%; }
 
+img {
+  max-height: 300px;
+  max-width: 300px;
+  position: center center fixed; }
+
+img.thumbnail {
+  width: 100px;
+  height: 100px; }
+
 /*!
   Ionicons, v2.0.1
   Created by Ben Sperry for the Ionic Framework, http://ionicons.com/

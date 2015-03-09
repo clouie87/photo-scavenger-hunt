@@ -37,8 +37,11 @@ angular.module('starter.controllers', [])
       }, cameraOptions);
     }
   })
-.controller('WinsCtrl', function($scope){
-  })
+.controller('WinsCtrl', ['$scope', 'Photos', function($scope, Photos){
+      Photos.all().success(function(data){
+        $scope.photos = data;
+      });
+    }])
 
 .controller('AccountCtrl', function($scope) {
   $scope.settings = {

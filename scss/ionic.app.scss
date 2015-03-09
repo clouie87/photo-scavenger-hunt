@@ -19,6 +19,18 @@ $dark:                            #444 !default;
   max-width: 75%;
 }
 
+img{
+  max-height: 300px;
+  max-width: 300px;
+  position: center center fixed;
+}
+
+img.thumbnail{
+  width: 100px;
+  height: 100px;
+}
+
+
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 

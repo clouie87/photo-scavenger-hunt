@@ -47,4 +47,20 @@ angular.module('starter.services', [])
       return null;
     }
   };
-});
+})
+.factory('Photos', ['$http', function PhotoFactory($http) {
+
+  return {
+    all: function() {
+      return $http({
+        method:'GET',
+        url:'http://clouie.ca/photo/'
+      });
+    }
+    //get: function(photoDescription) {
+    //    // Simple index lookup
+    //    return photos[photoDescription];
+    //}
+  };
+
+}]);
