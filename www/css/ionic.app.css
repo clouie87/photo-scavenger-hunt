@@ -14,6 +14,9 @@ $assertive:                       #ef473a !default;
 $royal:                           #886aea !default;
 $dark:                            #444 !default;
 */
+.selected {
+  background: orange; }
+
 .challenge {
   max-width: 75%; }
 

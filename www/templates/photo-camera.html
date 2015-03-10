@@ -5,13 +5,18 @@
             <div class="item item-divider">Your Photo</div>
             <div class="item item-body">
                 <div class="your-photo" style="width:300px;height:300px;border:1px solid #000;">
-                    <image src="{{imageURI}}" style="width:300px;height:300px;" />
+                    <image ng-src="{{imageURI}}" style="width:300px;height:300px;" />
+
                 </div>
             </div>
         </div>
 
-        <button class="button button-calm">
-            Submit</button>
-        <button class="button button-energized">Create</button>
+        <div class="row">
+            <p class="col"></p>
+        <button class="col col-33 button button-calm" >Submit</button>
+            <p class="col col-5"></p>
+        <button class="col col-33 button button-energized" ng-controller="NewPhotoCtrl" ng-click="showAddPhoto()">Create</button>
+            <p class="col"></p>
+        </div>
     </ion-content>
 </ion-view>

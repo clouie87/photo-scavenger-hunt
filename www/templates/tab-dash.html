@@ -1,58 +1,68 @@
 <ion-view view-title="Dashboard">
+  <ion-content>
 
 
-  <ion-content class="padding">
 
-    <div class="list card">
-      <div class="item item-divider">Your Current Challenges</div>
-      <!--<div class="item item-body">-->
-        <!--<div>-->
-          <!--There is a fire in <b>sector 3</b>-->
-        <!--</div>-->
+    <div class="button-bar tabgroup" ng-init="tab=1">
+
+      <div class="button" ng-click="tab = 1">Current</div>
+
+      <div class="button" ng-click="tab = 2">Explore</div>
+      <!--in the explore i would just need to do challenge in challenges and print them all-->
+
+    </div>
+
+    <div class="tabcontents">
+      <div ng-show="tab === 1">
+
+        <ion-item class="list-card"  ng-repeat="challenge in challenges | filter:'da'" type="item-text-wrap" href="#/tab/challenge/{{challenge.id}}">
+
+          <h2 class="item item-divider">{{challenge.name}}</h2>
+          <div class="item item-image">
+            <img style="max-width: 250px" ng-src="{{challenge.photo}}">
+            <i class="icon ion-chevron-right icon-accessory"></i>
+          </div>
+          <p class="item item-divider">{{challenge.lastText}}</p>
+        </ion-item>
+
+      </div>
+
+      <div ng-show="tab === 2">
+        <ion-item class="list-card"  ng-repeat="challenge in challenges" type="item-text-wrap" href="#/tab/challenge/{{challenge.id}}">
+          <h2 class="item item-divider">{{challenge.name}}</h2>
+          <div class="item item-image">
+            <img style="max-width: 250px" ng-src="{{challenge.photo}}">
+            <i class="icon ion-chevron-right icon-accessory"></i>
+          </div>
+          <p class="item item-divider">{{challenge.lastText}}</p>
+        </ion-item>
+
+      </div>
+    </div>
+
+
+
+    <!--<ion-item class="list-card" ng-repeat="challenge in challenges" type="item-text-wrap" href="#/tab/challenge/{{challenge.id}}">-->
+
+      <!--<h2 class="item item-divider">{{challenge.name}}</h2>-->
+      <!--<div class="item item-image">-->
+        <!--<img style="max-width: 250px" ng-src="{{challenge.photo}}">-->
+        <!--<i class="icon ion-chevron-right icon-accessory"></i>-->
       <!--</div>-->
+      <!--<p class="item item-divider">{{challenge.lastText}}</p>-->
 
-      <ion-slide-box on-slide-changed="slideHasChanged($index)">
-        <ion-slide>
-          <div class="box blue">
-            <div class="item item-body">
-              <div class="left-buffer"></div>
 
-              <div class="row">
-                <h2 class="challenge"> THIS WILL BE THE CHALLENGE #1</h2>
-                <p style="color:transparent">skd</p>
-                <div>
-                  <div style="height: 16px"></div>
-                  <i class="icon ion-chevron-right"></i>
-                </div>
+      <!--<ion-option-button class="button-assertive" ng-click="remove(challenge)">-->
+        <!--Delete-->
+      <!--</ion-option-button>-->
+    <!--</ion-item>-->
 
-              </div>
-            </div>
-            <div style="height: 60px"></div>
-          </div>
-        </ion-slide>
-
-        <ion-slide>
-          <div class="box yellow">
-            <div class="item item-body">
-              <div class="left-buffer"></div>
-              <div class="row">
-                <h2 class="challenge"> THIS WILL BE THE CHALLENGE #2</h2>
-                <p style="color:transparent">skd</p>
-                <div>
-                  <div style="height: 16px"></div>
-                  <i class="icon ion-chevron-right"></i>
-                </div>
-              </div>
-            </div>
-            <div style="height: 60px"></div>
-          </div>
-        </ion-slide>
-
-        <ion-slide>
-          <div class="box pink"><h1>PINK</h1></div>
-        </ion-slide>
-
-      </ion-slide-box>
-  </div>
   </ion-content>
 </ion-view>
+
+<script>
+  $(function() {
+    $( "#tabs" ).tabs();
+  });
+</script>
+

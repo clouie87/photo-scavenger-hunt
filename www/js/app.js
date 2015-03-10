@@ -21,9 +21,13 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($compileProvider, $stateProvider, $urlRouterProvider) {
+      //this has something to do with whitelisting my photos.. i need to research this
+  $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel):/);
 
-  // Ionic uses AngularUI Router which uses the concept of states
+
+
+// Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
@@ -39,6 +43,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   // Each tab has its own nav history stack:
 
   .state('tab.dash', {
+    url: '/dash',
+    views: {
+      'tab-dash': {
+        templateUrl: 'templates/tab-dash.html',
+        controller: 'DashCtrl'
+      }
+    }
+  })
+
+  .state('tab.category-select', {
     url: '/dash',
     views: {
       'tab-dash': {
@@ -65,6 +79,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         'tab-photo': {
           templateUrl: 'templates/photo-camera.html',
           controller: 'CameraCtrl'
+        }
+      }
+    })
+
+    .state('tab.photo-new', {
+      url: '/photo/camera',
+      views: {
+        'tab-photo': {
+          templateUrl: 'templates/photo-new.html',
+          require: "^CameraCtrl",
+          controller: 'NewPhotoCtrl'
         }
       }
     })

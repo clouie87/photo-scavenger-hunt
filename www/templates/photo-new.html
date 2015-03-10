@@ -1,0 +1,13 @@
+
+<form method="POST" action="http://clouie.ca/photo" enctype="multipart/form-data">
+    <p>Challenge: <input type="Text" name="title"></p>
+    <!--<p>Photo: <input type="file" name="photo"></p>-->
+    <image ng-src="{{imageURI}}" style="width:100px;height:100px;" />
+    <p>Description: <input type="text" name="description"></p>
+    <input type="hidden" name="album_id" value="1">
+    <p class="row">
+        <input type="button" class="col button button button-light" value="Cancel" />
+        <input type="submit" class="col button button button-calm" value="Save" />
+    </p>
+
+</form>

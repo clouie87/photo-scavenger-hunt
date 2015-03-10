@@ -1,11 +1,33 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope) {})
+.controller('DashCtrl', function($scope, Challenges) {
+      $scope.challenges = Challenges.all();
+      $scope.remove = function(challenge) {
+        Chats.remove(challenge);
+      }
+    })
 
-.controller('CompeteCtrl', function($scope, Chats) {
-  $scope.chats = Chats.all();
-  $scope.remove = function(chat) {
-    Chats.remove(chat);
+.controller('ButtonCtrl', function($scope){
+      $scope.tab=1;
+      $scope.selectTab=function(setTab) {
+        $scope.tab = setTab;
+      };
+      $scope.isSelected=function(checkTab){
+        return $scope.tab===checkTab;
+        console.log(checkTab, " is selected");
+      };
+})
+    .controller('categorySelect', function(category){
+      return{
+
+      }
+    })
+
+
+.controller('CompeteCtrl', function($scope, Challenges) {
+  $scope.challenges = Challenges.all();
+  $scope.remove = function(challenge) {
+    Chats.remove(challenge);
   }
 })
 
@@ -30,7 +52,9 @@ angular.module('starter.controllers', [])
       navigator.camera.getPicture(function(imageURI) {
 
         $scope.imageURI = imageURI;
+        console.log('image is: ', imageURI);
         $state.go('tab.photo-camera');
+        console.log('image is: ', imageURI);
 
       }, function(err) {
 
@@ -39,6 +63,25 @@ angular.module('starter.controllers', [])
     }
   })
 
+  .controller('NewPhotoCtrl', function($scope,$ionicPopup, $http) {
+
+
+    $scope.showAddPhoto = function () {
+      $scope.data={};
+
+      var myAddPhoto = $ionicPopup.show({
+        templateUrl: 'templates/photo-new.html'
+      });
+
+
+      myAddPhoto.then(function (data) {
+        $http({method: 'POST', url: 'http://clouie.ca/photo', data: data});
+        console.log('posting the photo data');
+
+        console.log('Save the photo!', data);
+      });
+    }
+    })
 
 .controller('WinsCtrl', ['$scope', 'Photos', function($scope, Photos){
       Photos.all().success(function(data){
