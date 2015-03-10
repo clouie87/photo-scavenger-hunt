@@ -60,9 +60,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
 
     .state('tab.photo-camera', {
-      url: '/compete/camera',
+      url: '/photo/camera',
       views: {
-        'tab-compete': {
+        'tab-photo': {
           templateUrl: 'templates/photo-camera.html',
           controller: 'CameraCtrl'
         }
