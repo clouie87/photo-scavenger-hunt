@@ -9,11 +9,11 @@ angular.module('starter.controllers', [])
   }
 })
 
-.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
-  $scope.chat = Chats.get($stateParams.chatId);
+.controller('CameraCtrl', function($scope) {
+
 })
 
-  .controller('CameraCtrl', function($scope, $state) {
+  .controller('PhotoCtrl', function($scope, $state) {
 
     // set the default image URI (a color bar image)
     $scope.imageURI = 'http://www.arabamerica.com/wp-content/themes/arabamerica/assets/img/thumbnail-default.jpg';
@@ -23,13 +23,14 @@ angular.module('starter.controllers', [])
 
       var cameraOptions = {
         targetWidth: 300,
-        targetHeight: 300
+        targetHeight: 300,
+        allowEdit : true
       };
 
       navigator.camera.getPicture(function(imageURI) {
 
         $scope.imageURI = imageURI;
-        $state.go('tab.camera');
+        $state.go('tab.photo-camera');
 
       }, function(err) {
 
@@ -37,6 +38,8 @@ angular.module('starter.controllers', [])
       }, cameraOptions);
     }
   })
+
+
 .controller('WinsCtrl', ['$scope', 'Photos', function($scope, Photos){
       Photos.all().success(function(data){
         $scope.photos = data;
