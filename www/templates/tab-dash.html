@@ -5,9 +5,9 @@
 
     <div class="button-bar tabgroup" ng-init="tab=1">
 
-      <div class="button" ng-click="tab = 1">Current</div>
+      <div class="button" ng-click="tab = 1">Feed</div>
 
-      <div class="button" ng-click="tab = 2">Explore</div>
+      <div class="button" ng-click="tab = 2">Challenges</div>
       <!--in the explore i would just need to do challenge in challenges and print them all-->
 
     </div>
@@ -15,14 +15,24 @@
     <div class="tabcontents">
       <div ng-show="tab === 1">
 
-        <ion-item class="list-card"  ng-repeat="challenge in challenges | filter:'an'" type="item-text-wrap" href="#/tab/challenge/{{challenge.id}}">
+        <ion-item class="list-card"  ng-controller="DashCtrl" ng-repeat="photo in photos" type="item-text-wrap" href="#/tab/photo/{{photo.id}}">
 
-          <h2 class="item item-divider">{{challenge.name}}</h2>
-          <div class="item item-image">
-            <img style="max-width: 250px" ng-src="{{challenge.photo}}">
-            <i class="icon ion-chevron-right icon-accessory"></i>
+          <div class="item item-divider">
+            <h2>{{photo.description}}</h2>
+            <!--<p>Nine Inch Nails</p>-->
           </div>
-          <p class="item item-divider">{{challenge.lastText}}</p>
+
+          <div class="item item-image">
+            <img src="http://clouie.ca/{{photo.filepath}}">
+          </div>
+
+
+          <div class="item item-divider">
+            <i class="icon ion-ios-star">  {{photo.id}}</i>
+            <!--this will become photo.stars-->
+
+            <!--<p>Nine Inch Nails</p>-->
+          </div>
         </ion-item>
 
       </div>
@@ -30,11 +40,15 @@
       <div ng-show="tab === 2">
         <ion-item class="list-card"  ng-repeat="challenge in challenges" type="item-text-wrap" href="#/tab/challenge/{{challenge.id}}">
           <h2 class="item item-divider">{{challenge.name}}</h2>
-          <div class="item item-image">
-            <img style="max-width: 250px" ng-src="{{challenge.photo}}">
-            <i class="icon ion-chevron-right icon-accessory"></i>
-          </div>
-          <p class="item item-divider">{{challenge.lastText}}</p>
+          <div class="item item-image" >
+            <h2 class="textOnImage" >{{challenge.lastText}}</h2>
+            <figure class="tint">
+              <h2 class="textOnImage" >{{challenge.lastText}}</h2>
+              <img ng-src="{{challenge.photo}}" alt="" width="250">
+            </figure>
+
+            <img style="background: black; opacity: 0.7; width: 250px" >
+            </div>
         </ion-item>
 
       </div>

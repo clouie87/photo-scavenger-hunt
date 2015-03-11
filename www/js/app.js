@@ -52,15 +52,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     }
   })
 
-  .state('tab.category-select', {
-    url: '/dash',
-    views: {
-      'tab-dash': {
-        templateUrl: 'templates/tab-dash.html',
-        controller: 'DashCtrl'
-      }
-    }
-  })
+
 
   .state('tab.compete', {
       url: '/compete',
@@ -88,6 +80,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       views: {
         'tab-photo': {
           templateUrl: 'templates/photo-new.html',
+          require: "^CameraCtrl",
+          controller: 'NewPhotoCtrl'
+        }
+      }
+    })
+
+    .state('tab.challenge-new', {
+      url: '/photo/camera',
+      views: {
+        'tab-photo': {
+          templateUrl: 'templates/challenge-new.html',
           require: "^CameraCtrl",
           controller: 'NewPhotoCtrl'
         }
