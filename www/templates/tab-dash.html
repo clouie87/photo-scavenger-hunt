@@ -39,7 +39,13 @@
 
       <div ng-show="tab === 2">
         <ion-item class="list-card"  ng-repeat="challenge in challenges" type="item-text-wrap" href="#/tab/challenge/{{challenge.id}}">
-          <h2 class="item item-divider">{{challenge.name}}</h2>
+
+          <h2 class="item item-divider">
+            <p style="margin-top: 5%; float:left">{{challenge.name}}</p>
+            <a class="button button-icon ion-ios-checkmark-outline"></a>
+          <!--<i icon-off="ion-ios-plus-outline" icon-on="ion-ios-plus"></i>-->
+          </h2>
+
           <div class="item item-image" >
             <figure class="tint">
               <h2 class="textOnImage" >{{challenge.description}}</h2>

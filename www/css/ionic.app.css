@@ -21,6 +21,10 @@ $dark:                            #444 !default;
 .selected {
   background: orange; }
 
+.button.button-icon {
+  float: right;
+  font-size: 30px; }
+
 .item-content {
   margin-left: 3%; }
 
