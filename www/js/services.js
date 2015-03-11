@@ -49,54 +49,30 @@ angular.module('starter.services', [])
   };
 })
 
-.factory('Challenges', function() {
+.factory('Challenges', ['$http', function ChallengesFactory($http) {
   // Might use a resource here that returns a JSON array
-
-  // Some fake testing data
-  var challenges = [{
-    id: 0,
-    name: 'Faye',
-    lastText: 'Most pretty stained glass',
-    photo: 'http://upload.wikimedia.org/wikipedia/commons/f/f2/Meaux_Vitrail_1867_30808_3.jpg'
-  }, {
-    id: 1,
-    name: 'AJ',
-    lastText: 'Happiest Fiddler',
-    photo: 'http://1.bp.blogspot.com/_N3CFuFDnOUo/S8xzYii0C0I/AAAAAAAAABA/6d-idPSYvnY/s1600/A+Very+Toothy,+Very+Happy+Fiddler!+Photo+Two.jpg'
-  }, {
-    id: 2,
-    name: 'Darren',
-    lastText: 'Best action shot on the ski hill',
-    photo: 'http://payload40.cargocollective.com/1/6/222050/3105035/Screen-shot-2014-03-09-at-10.19.52-AM.png'
-  }, {
-    id: 3,
-    name: 'Darian',
-    lastText: 'Cutest puppy photo',
-    photo: 'https://lh3.ggpht.com/WWhVjw6kHGldtpvkfbMXYJcYf0HDIIyth3By1Kl7UAKBdo333wLQ6YNSfXGezVa3eg=h900'
-  }, {
-    id: 4,
-    name: 'Brian',
-    lastText: 'Pet that looks most like a pokemon',
-    photo: 'http://www.funnypet-pictures.com/wp-content/uploads/real-life-pikachu.jpg'
-  }];
-
   return {
-    all: function() {
-      return challenges;
-    },
-    remove: function(challenge) {
-      challenges.splice(challenges.indexOf(challenge), 1);
-    },
-    get: function(challengeID) {
-      for (var i = 0; i < challenges.length; i++) {
-        if (challenges[i].id === parseInt(challengeID)) {
-          return challenges[i];
-        }
-      }
-      return null;
+    all: function () {
+      return $http({
+        method: 'GET',
+        url: 'http://clouie.ca/challenge/'
+      });
     }
   };
-})
+  //  },
+  //  remove: function(challenge) {
+  //    challenges.splice(challenges.indexOf(challenge), 1);
+  //  },
+  //  get: function(challengeID) {
+  //    for (var i = 0; i < challenges.length; i++) {
+  //      if (challenges[i].id === parseInt(challengeID)) {
+  //        return challenges[i];
+  //      }
+  //    }
+  //    return null;
+  //  }
+  //};
+}])
 
 
 .factory('Photos', ['$http', function PhotoFactory($http) {

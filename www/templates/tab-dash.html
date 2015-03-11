@@ -41,17 +41,14 @@
         <ion-item class="list-card"  ng-repeat="challenge in challenges" type="item-text-wrap" href="#/tab/challenge/{{challenge.id}}">
           <h2 class="item item-divider">{{challenge.name}}</h2>
           <div class="item item-image" >
-            <h2 class="textOnImage" >{{challenge.lastText}}</h2>
             <figure class="tint">
-              <h2 class="textOnImage" >{{challenge.lastText}}</h2>
-              <img ng-src="{{challenge.photo}}" alt="" width="250">
+              <h2 class="textOnImage" >{{challenge.description}}</h2>
+              <img ng-src="http://clouie.ca/{{challenge.filepath}}">
             </figure>
-
-            <img style="background: black; opacity: 0.7; width: 250px" >
             </div>
         </ion-item>
-
       </div>
+
     </div>
 
 

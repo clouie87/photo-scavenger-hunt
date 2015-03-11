@@ -4,10 +4,13 @@ angular.module('starter.controllers', [])
         Photos.all().success(function(data) {
             $scope.photos = data;
         });
-      $scope.challenges = Challenges.all();
-      $scope.remove = function(challenge) {
-        Chats.remove(challenge);
-      }
+      Challenges.all().success(function(data) {
+        $scope.challenges = data;
+      });
+      //$scope.challenges = Challenges.all();
+      //$scope.remove = function(challenge) {
+      //  Chats.remove(challenge);
+      //}
     }])
 
 .controller('ButtonCtrl', function($scope){

@@ -22,9 +22,12 @@ $dark:                            #444 !default;
   background: orange;
 }
 
-.challenge{
-  max-width: 75%;
+.item-content{
+  margin-left: 3%;
 }
+//.challenge{
+//  max-width: 75%;
+//}
 
 h2.textOnImage.ng-binding{
   font-family: awesome;
@@ -47,7 +50,9 @@ h2.textOnImage.ng-binding{
 img{
   max-height: 300px;
   max-width: 300px;
-  background: rgba(0,0,0, 0.5);
+//  margin-left: 5%;
+  position: center center fixed;
+//  background: rgba(0,0,0, 0.5);
 
 }
 
