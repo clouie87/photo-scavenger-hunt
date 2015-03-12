@@ -42,8 +42,9 @@
 
           <h2 class="item item-divider">
             <p style="margin-top: 5%; float:left">{{challenge.name}}</p>
-            <a class="button button-icon ion-ios-checkmark-outline"></a>
-          <!--<i icon-off="ion-ios-plus-outline" icon-on="ion-ios-plus"></i>-->
+            <a class="button button-icon ion-ios-checkmark-outline" icon-off="ion-ios-plus-outline" icon-on="ion-ios-plus" ng-click="activateChallenge(challenge.c_id)"></a>
+            <!--<a class="button button-icon ion-ios-checkmark-outline" ng-click="activateChallenge()"></a>-->
+          <!--<ion-option-button icon-off="ion-ios-plus-outline" icon-on="ion-ios-plus"></ion-option-button>-->
           </h2>
 
           <div class="item item-image" >

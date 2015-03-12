@@ -25,6 +25,11 @@ $dark:                            #444 !default;
   float: right;
   font-size: 30px; }
 
+.button.button-icon:active {
+  float: right;
+  font-size: 30px;
+  background-color: darkgreen; }
+
 .item-content {
   margin-left: 3%; }
 

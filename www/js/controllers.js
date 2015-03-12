@@ -1,28 +1,33 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', ['$scope', 'Photos', 'Challenges', function($scope, Photos, Challenges) {
-        Photos.all().success(function(data) {
+.controller('DashCtrl', ['$scope', '$http', 'Photos', 'Challenges', function($scope, $http, Photos, Challenges) {
+        Photos.all().success(function(req, data) {
             $scope.photos = data;
+            //console.log(req.body.id);
         });
       Challenges.all().success(function(data) {
         $scope.challenges = data;
       });
-      //$scope.challenges = Challenges.all();
+      $scope.activateChallenge= function(c_id){
+        var data = {
+          'c_id': c_id
+        };
+        console.log("the add Challenge button was clicked");
+        $http({method: 'POST', url: 'http://clouie.ca/accepted', withCredentials: true, data: data});
+            console.log('posting the c_id data');
+
+
+
+        console.log("this is challenge id", c_id);
+
+    };
+
+//$scope.challenges = Challenges.all();
       //$scope.remove = function(challenge) {
       //  Chats.remove(challenge);
       //}
     }])
 
-.controller('ButtonCtrl', function($scope){
-      $scope.tab=1;
-      $scope.selectTab=function(setTab) {
-        $scope.tab = setTab;
-      };
-      $scope.isSelected=function(checkTab){
-        return $scope.tab===checkTab;
-        console.log(checkTab, " is selected");
-      };
-})
 
 
 
@@ -84,19 +89,19 @@ angular.module('starter.controllers', [])
         var myAddChallenge = $ionicPopup.show({
           templateUrl: 'templates/challenge-new.html',
           buttons: [
-              {text: 'Cancel'}
-              //{
-              //    text:'<b>Save</b>',
-              //    type: 'submit',
-              //    class: 'button-calm'
-              //
-              //}
+              {text: 'Cancel'},
+              {
+                  text:'<b>Save</b>',
+                  type: 'submit',
+                  class: 'button-calm'
+
+              }
           ]
         });
 
 
         myAddChallenge.then(function (data) {
-          $http({method: 'POST', url: 'http://clouie.ca/challenge', data: data});
+          $http({method: "POST", url: "http://clouie.ca/challenge", data: data});
           console.log('posting the challenge data');
 
           console.log('Save the challenge!', data);
@@ -105,12 +110,7 @@ angular.module('starter.controllers', [])
 
 
       };
-        //$scope.hideAddChallenge = function(cancel) {
-        //    console.log('cancel was clicked');
-        //    $ionicPopup.deactivate({
-        //        templateUrl: 'templates/challenge-new.html'
-        //    });
-        //};
+
 
 
   })
@@ -148,7 +148,7 @@ angular.module('starter.controllers', [])
             templateUrl: 'templates/challenge-new.html'
           });
           myAddChallenge.then(function (data) {
-            $http({method: 'POST', url: 'http://clouie.ca/challenge', data: data});
+            $http({method: "POST", url: "http://clouie.ca/challenge", data: data});
             console.log('posting the challenge data');
 
             console.log('Save the challenge!', data);
