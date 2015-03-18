@@ -1,15 +1,16 @@
 
-<form method="POST" action="http://clouie.ca/challenge" enctype="multipart/form-data">
-    <p>Challenge: <input type="text" name="name"></p>
-    <!--<p>Challenge ID: <input type="text" name="c_id"></p>-->
-    <p>Photo: <input type="file" name="photo"></p>
-    <image ng-src="{{imageURI}}" style="width:100px; height:100px" />
-    <p>Description: <input type="text" name="description"></p>
+<form name="challengeForm" novalidate>
+    <p>Challenge: <input type="text" ng-model="challenge.name" name="name"></p>
+    <p>Photo: <image ng-src="{{data.imageURI}}" style="width:100px; height:100px"  /></p>
+    <!--<input type="hidden" name="photo" value="{{data.imageURI}}"/>-->
+
+
+    <p>Description: <input type="text" ng-model="challenge.description" ></p>
     <input type="hidden" name="album_id" value="1">
     <!--<p class="row">-->
     <!--<p><input type="cancel"></p>-->
         <!--<input type="button"  ng-click="hideAddChallenge()" class="col button button button-light" value="Cancel" />-->
-        <input type="submit" class="col button button button-calm" value="Save" />
+        <!--<input type="submit" class="col button button button-calm" value="Save" />-->
     <!--</p>-->
 
 </form>

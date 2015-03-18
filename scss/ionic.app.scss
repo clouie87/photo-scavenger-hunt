@@ -14,6 +14,7 @@ $assertive:                       #ef473a !default;
 $royal:                           #886aea !default;
 $dark:                            #444 !default;
 */
+
 @font-face {
   font-family: awesome;
   src: url('font-awesome-4.3.0/fonts/fontawesome-webfont.eot') format('embedded-opentype');
@@ -24,17 +25,16 @@ $dark:                            #444 !default;
 .button.button-icon{
   float:right;
   font-size: 30px;
-}
-
-.button.button-icon:active{
-  float:right;
-  font-size: 30px;
-  background-color: darkgreen;
+  color: green;
 }
 
 .item-content{
   margin-left: 3%;
 }
+
+//.item-divider{
+//  background-color: #0D1070 !important;
+//}
 //.challenge{
 //  max-width: 75%;
 //}

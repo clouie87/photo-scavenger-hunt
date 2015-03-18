@@ -21,9 +21,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   });
 })
 
-.config(function($compileProvider, $stateProvider, $urlRouterProvider) {
+.config(function($compileProvider, $httpProvider, $stateProvider, $urlRouterProvider) {
       //this has something to do with whitelisting my photos.. i need to research this
-  $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel):/);
+    $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|file|blob):|data:image\//);
+    $httpProvider.defaults.withCredentials = true; //sets default to send credentials with every request
+    //need to tell the serve that all the credentials are ok or else it wont deserialize my
+    //user... why? I couldnt tell you. it maybe tells angular to send the cookies with each request (?)
 
 
 
@@ -32,6 +35,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
   $stateProvider
+
+    .state('login', {
+    url:"/login",
+    templateUrl: "templates/login.html",
+    controller: 'LoginCtrl'
+  })
 
   // setup an abstract state for the tabs directive
     .state('tab', {
@@ -48,8 +57,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       'tab-dash': {
         templateUrl: 'templates/tab-dash.html',
         controller: 'DashCtrl'
+        }
       }
-    }
   })
 
 
@@ -129,6 +138,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/dash');
+  $urlRouterProvider.otherwise('/login');
 
 });

@@ -1,5 +1,61 @@
 angular.module('starter.services', [])
 
+.directive('iconSwitcher', function(){
+
+  return{
+  restrict: 'A',
+    link: function(scope, elem, attrs) {
+      var currentState = true;
+
+      elem.on('click', function () {
+        console.log('clicked!');
+
+        if (currentState === true) {
+          console.log('it is on!');
+          angular.element(elem).removeClass(attrs.iconOff);
+          angular.element(elem).addClass(attrs.iconOn);
+        } else {
+          console.log('it is off');
+          angular.element(elem).removeClass(attrs.iconOn);
+          angular.element(elem).addClass(attrs.iconOff);
+
+        }
+        currentState = !currentState;
+      })
+    }
+  }
+})
+
+.factory('Users', ['$http', function UsersFactory($http) {
+    var users = {};
+    return {
+      all: function () {
+        return $http({
+          method: 'GET',
+          url: 'http://clouie.ca/users/'
+        });
+      },
+      create: function () {
+        return $http({
+          method: "POST",
+          url: "http://clouie.ca/login",
+
+          //data: user
+
+          //{
+          //email: $scope.data.email,
+          //password: $scope.data.password
+          //}
+        })
+      },
+      //}
+      get: function (userId) {
+        return users[userId];
+      }
+    };
+  //}
+}])
+
 .factory('Chats', function() {
   // Might use a resource here that returns a JSON array
 

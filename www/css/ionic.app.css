@@ -23,12 +23,8 @@ $dark:                            #444 !default;
 
 .button.button-icon {
   float: right;
-  font-size: 30px; }
-
-.button.button-icon:active {
-  float: right;
   font-size: 30px;
-  background-color: darkgreen; }
+  color: green; }
 
 .item-content {
   margin-left: 3%; }

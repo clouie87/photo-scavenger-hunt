@@ -1,0 +1,18 @@
+<ion-view view-title="Login">
+  <ion-content class="padding">
+    <div class="buffer"></div>
+    <image src="./img/graffitiCam.jpg" />
+    <div class="list list-inset">
+      <label class="item item-input">
+        <input type="text" placeholder="E-mail" ng-model="data.email">
+      </label>
+      <label class="item item-input">
+        <input type="password" placeholder="Password" ng-model="data.password">
+      </label>
+    </div>
+    <div class="row">
+    <button class="button button-block button-calm" ng-click="localLogin()">Login</button>
+    <button class="button button-block button-calm" ng-click="facebookLogin()">Login via Facebook</button>
+    </div>
+  </ion-content>
+</ion-view>

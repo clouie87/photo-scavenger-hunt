@@ -4,9 +4,8 @@
         <div class="list card">
             <div class="item item-divider">Your Photo</div>
             <div class="item item-body">
-                <div class="your-photo" style="width:300px;height:300px;border:1px solid #000;">
-                    <image ng-src="{{imageURI}}" style="width:300px;height:300px;" />
-
+                <div ng-controller="PhotoCtrl" class="your-photo" style="width:300px;height:300px;border:1px solid #000;">
+                    <img ng-src="{{data.imageURI}}" style="width:300px;" />
                 </div>
             </div>
         </div>
