@@ -114,6 +114,10 @@ angular.module('starter.services', [])
         url: 'http://clouie.ca/challenge/'
       });
     }
+    //get: function() {
+    //
+    //  }
+
   };
   //  },
   //  remove: function(challenge) {

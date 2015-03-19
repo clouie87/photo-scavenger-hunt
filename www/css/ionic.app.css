@@ -26,6 +26,9 @@ $dark:                            #444 !default;
   font-size: 30px;
   color: green; }
 
+.center {
+  margin: auto; }
+
 .item-content {
   margin-left: 3%; }
 

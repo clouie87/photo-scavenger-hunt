@@ -18,6 +18,9 @@
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
 
+    <!-- ionic/include local storage js -->
+    <script src="lib/ngstorage/ngStorage.min.js"></script>
+
 
     <!-- cordova script (this will be a 404 during development) -->
     <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
@@ -35,14 +38,27 @@
       The nav bar that will be updated as we navigate between views.
     -->
     <ion-nav-bar class="bar-positive">
-      <ion-nav-back-button>
-      </ion-nav-back-button>
+      <ion-nav-back-button></ion-nav-back-button>
+      <ion-nav-buttons side="right">
+        <button id="logout" class="button button-clear button-light" ng-controller="LogoutCtrl" ng-click="logout()">
+          Logout
+        </button>
+      </ion-nav-buttons>
     </ion-nav-bar>
+
+
     <!--
       The views will be rendered in the <ion-nav-view> directive below
       Templates are in the /templates folder (but you could also
       have templates inline in this html file if you'd like).
     -->
-    <ion-nav-view></ion-nav-view>
+    <ion-nav-view>
+    </ion-nav-view>
+  <script>
+    $(document).ready(function($localStorage){
+      console.log('can do some simple changes for front end');
+
+    });
+  </script>
   </body>
 </html>

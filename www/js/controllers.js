@@ -1,7 +1,12 @@
-angular.module('starter.controllers', [])
+angular.module('starter.controllers', ['ngStorage'])
 
-.controller('LoginCtrl', ['$scope', '$state', '$http', 'Users', function($scope, $state, $http, Users) {
+.controller('LoginCtrl', ['$scope', '$state', '$http', 'Users', '$localStorage', function($scope, $state, $http, Users, $localStorage) {
   //console.log('at login Ctrl');
+    $("button#logout").hide();
+
+
+
+
     $scope.data = {};
     $scope.localLogin= function(){
       console.log('clicked localLogin');
@@ -13,19 +18,15 @@ angular.module('starter.controllers', [])
 
           //successful login, in our example, we will just send an alert message
             alert("Congrats, you logged in with user ID "+result.data.user_id);
+
             $state.go('tab.dash');
+            $("button#logout").show();
+
             var u_id = result.data.user_id;
+            $localStorage.u_id = u_id;
             console.log(u_id);
             return u_id;
-
-
-
           }
-        //    else {
-        //
-        //  // unsuccessful login.  In our example, we are just sending an alert message
-        //  alert(result.data.message);
-        //}
       }, function(error) {
           if (error.status= 401){
             alert("the email and password doesnt match!");
@@ -34,11 +35,44 @@ angular.module('starter.controllers', [])
             alert("There was a problem getting your profile.  Check the logs for details.");
             console.log(error);
           }
-      }
-    );
-    //}
+      });
+    };
+    //$scope.data={};
+    $scope.localSignup = function(){
+      console.log('clicked localSignup');
+      //Users.create({ email: $scope.data.email, password: $scope.data.password }).then(function(result){
+      $http.post("http://clouie.ca/signup", { email: $scope.data.email, password: $scope.data.password }).then(function(result) {
+        alert('sent to signup post request');
+          console.log(result);
+
+          if (result.data.status == true) {
+      //
+      //      //successful login, in our example, we will just send an alert message
+            alert("Congrats, you've signed up! Your usesr ID is: " + result.data.user_id);
+            $state.go('tab.dash');
+            var u_id = result.data.user_id;
+            console.log(u_id);
+            return u_id;
+          }
+          }, function (error) {
+            if (error.status = 401) {
+              alert("the email and password doesnt match!");
+
+            } else {
+              alert("There was a problem getting your profile.  Check the logs for details.");
+              console.log(error);
+            }
+          });
+      };
+    $scope.facebookLogin = function() {
+      console.log('clicked facebookLogin');
+      //Users.create({ email: $scope.data.email, password: $scope.data.password }).then(function(result){
+      $http.post("http://clouie.ca/auth/facebook", {email: $scope.data.email}).then(function (result) {
+        alert('sent to signup post request');
+        console.log(result);
+      })
     }
-}])
+  }])
 
 .controller('DashCtrl', ['$scope', '$http', 'Photos', 'Challenges', function($scope, $http, Photos, Challenges, u_id) {
         Photos.all().success(function(data) {
@@ -267,7 +301,7 @@ $scope.challenges = Challenges.all();
 
   })
 
-  .controller('NewPhotoCtrl', function($scope,$ionicPopup, $http) {
+  .controller('NewPhotoCtrl', ['$scope', '$ionicPopup', '$http', 'Challenges', function($scope,$ionicPopup, $http, Challenges) {
         $scope.close = function(){
             console.log('cancel was clicked');
             $scope.deactivate();
@@ -292,7 +326,12 @@ $scope.challenges = Challenges.all();
 
           console.log('Save the photo!', data);
         });
+
       };
+      Challenges.all().success(function(data) {
+      console.log(data);
+      $scope.challenges = data;
+      });
       //  $scope.showAddChallenge = function () {
       //    $scope.data = {};
       //
@@ -307,11 +346,47 @@ $scope.challenges = Challenges.all();
       //    });
       //
       //}
-    })
+    }])
 
-.controller('WinsCtrl', ['$scope', 'Photos', function($scope, Photos){
+.controller('ChallengeCtrl', ['$scope', 'Challenges', '$localStorage', function($scope, Challenges, $localStorage){
+  var u_id = $localStorage.u_id
+  Challenges.all().success(function(data) {
+    console.log(data);
+    $scope.challenges = data;
+  });
+
+}])
+
+//.controller('DropdownCtrl', function($scope, $log){
+//  $scope.items = [
+//    'The first choice!',
+//    'And another choice for you.',
+//    'but wait! A third!'
+//  ];
+//
+//  $scope.status = {
+//    isopen: false
+//  };
+//
+//  $scope.toggled = function(open) {
+//    $log.log('Dropdown is now: ', open);
+//  };
+//
+//  $scope.toggleDropdown = function($event) {
+//    $event.preventDefault();
+//    $event.stopPropagation();
+//    $scope.status.isopen = !$scope.status.isopen;
+//  };
+//
+//})
+
+.controller('WinsCtrl', ['$scope', 'Photos', 'Challenges', function($scope, Photos, Challenges){
       Photos.all().success(function(data){
         $scope.photos = data;
+      });
+      Challenges.all().success(function(data) {
+      console.log(data);
+      $scope.challenges = data;
       });
     }])
 
@@ -319,4 +394,20 @@ $scope.challenges = Challenges.all();
   $scope.settings = {
     enableFriends: true
   };
-});
+})
+
+.controller('LogoutCtrl', ['$scope', '$state', '$localStorage', function($scope, $state, $localStorage) {
+    //console.log('at login Ctrl');
+    $scope.data = {};
+
+    $scope.logout = function () {
+      var u_id = $localStorage.u_id;
+      $("#logout").hide();
+
+      console.log(u_id + ' is logging out');
+      delete $localStorage.u_id;
+
+      $state.go('login');
+    }
+}]);
+

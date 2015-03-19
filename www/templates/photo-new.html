@@ -1,8 +1,20 @@
 
 <form method="POST" action="http://clouie.ca/photo" enctype="multipart/form-data">
-    <!--<p>Challenge: <input type="text" name="title"></p>-->
-    <p>Challenge ID: <input type="text" name="c_id"></p>
-    <p>Photo: <input type="file" name="photo"></p>
+
+
+
+
+  <p>Submit to:</p>
+    <select ng-controller="ChallengeCtrl">
+      <option>Choose the Challenge</option>
+      <option ng-repeat="challenge in challenges">{{challenge.name}}</option> <!--| filter: {u_id: u_id}-->
+    </select>
+  <br></br>
+  <p> <image ng-src="{{data.imageURI}}" style="width:100px; height:100px"  /></p>
+
+
+
+    <!--<p>Photo: <input type="file" name="photo"></p>-->
     <!--<image ng-src="{{imageURI}}" style="width:100px;height:100px;" />-->
     <p>Description: <input type="text" name="description"></p>
     <input type="hidden" name="album_id" value="1">

@@ -10,9 +10,40 @@
         <input type="password" placeholder="Password" ng-model="data.password">
       </label>
     </div>
-    <div class="row">
-    <button class="button button-block button-calm" ng-click="localLogin()">Login</button>
-    <button class="button button-block button-calm" ng-click="facebookLogin()">Login via Facebook</button>
+
+    <button class="button button-block button-energized" ng-click="localLogin()">Login</button>
+
+    <div class="center" style= "width: 30px; height:20px">OR</div>
+
+    <button class="button button-block button-positive" ng-click="localSignup()">Signup</button>
+
+
+    <!--<div class="row">-->
+      <!--<div class="col">-->
+        <!--<button class="button button-block button-energized" ng-click="localSignup()">Signup</button>-->
+      <!--</div>-->
+      <!--<div class="col">-->
+        <!--<button class="button button-block button-assertive" ng-click="localLogin()">Login</button>-->
+      <!--</div>-->
+      <!--<div class="col">-->
+        <!--<button class="button button-block button-positive" ng-click="facebookLogin()">Facebook</button>-->
+      <!--</div>-->
+      <!--<div class= "col">-->
+        <!--<button ng-click="instaSignin()" class="button button-energized button-block">-->
+          <!--Instagram-->
+        <!--</button>-->
+      <!--</div>-->
     </div>
   </ion-content>
 </ion-view>
+<script>
+  $(document).ready(function($localStorage){
+    var u_id = $localStorage.u_id;
+    console.log('can do some simple changes for front end');
+//    $("#logout").hide();
+
+//      $("#logout").hide();
+
+
+  });
+</script>
