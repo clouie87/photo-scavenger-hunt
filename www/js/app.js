@@ -27,6 +27,10 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     $httpProvider.defaults.withCredentials = true; //sets default to send credentials with every request
     //need to tell the serve that all the credentials are ok or else it wont deserialize my
     //user... why? I couldnt tell you. it maybe tells angular to send the cookies with each request (?)
+    //$routeProvider.when('#/tab/wins/', {
+    //    templateUrl: '/templates/tab-wins.html',
+    //    controller: 'WinsCtrl'
+    //  })
 
 
 
@@ -118,13 +122,18 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
   .state('tab.wins', {
     url: '/wins',
+      reload: true,
+      reloadOnSearch: true,
+
     views: {
       'tab-wins': {
-        templateUrl: 'templates/tab-wins.html',
-        controller: 'WinsCtrl'
+        templateUrl: '/templates/tab-wins.html',
+        controller: 'WinsCtrl',
+        reload: true
       }
     }
   })
+
 
 
       .state('tab.account', {
@@ -138,6 +147,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   });
 
   // if none of the above states are matched, use this as the fallback
+
   $urlRouterProvider.otherwise('/login');
 
 });

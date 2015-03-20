@@ -8,7 +8,7 @@
       <div>
         <select>
           <option>Choose the Challenge</option>
-          <option ng-repeat="challenge in challenges">{{challenge.name}}</option> <!--| filter: {u_id: u_id}--->
+          <option ng-repeat="accepted in accepteds">{{accepted.challenge}}</option> <!--| filter: {u_id: u_id}--->
         </select>
       </div>
       <!--<ion-item class="list" ng-controller="ChallengeCtrl" ng-repeat="challenge in challenges" type="item-text-wrap" >-->
@@ -18,24 +18,24 @@
         <!--</div>-->
       <!--</ion-item>-->
 
-        <ion-item class="list card" style="padding: 3px !important" ng-controller="WinsCtrl" ng-repeat="photo in photos" type="item-text-wrap" href="#/tab/photo/{{photo.id}}" >
+        <!--<ion-item class="list card" style="padding: 3px !important" ng-controller="WinsCtrl" ng-repeat="photo in photos" type="item-text-wrap" href="#/tab/photo/{{photo.id}}" >-->
 
-            <div class="item item-divider">
-                <h2>{{photo.description}}</h2>
-                <!--<p>Nine Inch Nails</p>-->
-            </div>
+            <!--<div class="item item-divider">-->
+                <!--<h2>{{photo.description}}</h2>-->
+                <!--&lt;!&ndash;<p>Nine Inch Nails</p>&ndash;&gt;-->
+            <!--</div>-->
 
-            <div class="item item-image">
-                <img src="http://clouie.ca/{{photo.filepath}}">
-            </div>
+            <!--<div class="item item-image">-->
+                <!--<img src="http://clouie.ca/{{photo.filepath}}">-->
+            <!--</div>-->
 
 
-            <div class="item item-divider">
-                <i class="icon ion-ios-star">  {{photo.id}}</i>
-                <!--this will become photo.stars-->
+            <!--<div class="item item-divider">-->
+                <!--<i class="icon ion-ios-star">  {{photo.id}}</i>-->
+                <!--&lt;!&ndash;this will become photo.stars&ndash;&gt;-->
 
-                <!--<p>Nine Inch Nails</p>-->
-            </div>
+                <!--&lt;!&ndash;<p>Nine Inch Nails</p>&ndash;&gt;-->
+            <!--</div>-->
 
 
 

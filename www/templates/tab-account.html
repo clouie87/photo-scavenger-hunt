@@ -1,6 +1,14 @@
 <ion-view view-title="Account">
   <ion-content>
+    <div>
+      <select>
+        <option>Choose the Challenge</option>
+        <option ng-repeat="challenge in accepted">{{challenge.name}}</option> <!--| filter: {u_id: u_id}--->
+      </select>
+    </div>
     <ion-list>
+
+
     <ion-toggle  ng-model="settings.enableFriends">
         Enable Friends
     </ion-toggle>

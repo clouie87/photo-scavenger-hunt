@@ -114,11 +114,20 @@ angular.module('starter.services', [])
         url: 'http://clouie.ca/challenge/'
       });
     }
-    //get: function() {
-    //
-    //  }
-
-  };
+    //get: function () {
+    //  return users[userId];
+    //}
+  }
+  //  get: function(u_id) {
+  //   for(var i = 0; user < object.length; ++user){
+  //    //console.log(object[user]);
+  //    if(object[user].u_id === u_id){
+  //      console.log(object[user]);
+  //      //data = object[user];
+  //      $scope.challenges = object[user];
+  //    }
+  //  }
+  //};
   //  },
   //  remove: function(challenge) {
   //    challenges.splice(challenges.indexOf(challenge), 1);
@@ -133,6 +142,18 @@ angular.module('starter.services', [])
   //  }
   //};
 }])
+
+  .factory('Accepteds', ['$http', function AcceptedsFactory($http) {
+    // Might use a resource here that returns a JSON array
+    return {
+      all: function () {
+        return $http({
+          method: 'GET',
+          url: 'http://clouie.ca/accepted/'
+        });
+      }
+    }
+  }])
 
 
 .factory('Photos', ['$http', function PhotoFactory($http) {
