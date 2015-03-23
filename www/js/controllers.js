@@ -85,21 +85,17 @@ angular.module('starter.controllers', ['ngStorage'])
         $scope.challenges = data;
       });
 
-    $scope.toggles=[{
-      state:false,
-      state:true
-    }];
+
 
       $scope.isActive= function(c_id){
         //var active= 'off';
         ActiveChallenges.all().success(function(challengeData) {
-          $scope.toggles={state: false};
 
           for (var i = 0; i < challengeData.length; i++) {
             console.log('c_id', challengeData[i].c_id);
             if (challengeData[i].c_id === c_id) {
-              console.log('switching state')
-              $scope.toggles={state:true};
+              console.log('switching state');
+
               return true;
             }
           }

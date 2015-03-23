@@ -28,7 +28,7 @@
 
 
           <div class="item item-divider">
-            <i class="icon ion-ios-star">  {{photo.id}}</i>
+            <a class= "button button-icon ion-ios-star-outline" icon-off="ion-ios-star-outline" icon-on="ion-ios-star">  {{photo.id}}</a>
             <!--this will become photo.stars-->
 
             <!--<p>Nine Inch Nails</p>-->
@@ -38,11 +38,11 @@
       </div>
 
       <div ng-show="tab === 2">
-        <ion-item class="list-card"  ng-repeat="challenge in challenges" type="item-text-wrap" href="#/tab/challenge/{{challenge.id}}">
+        <ion-item class="list-card"  ng-repeat="challenge in challenges" class="uncheckedClass" ng-class="{'checkedClass': challenge.iconOn, 'uncheckedClass': !challenge.iconOff}" type="item-text-wrap" href="#/tab/challenge/{{challenge.id}}">
 
           <h2 class="item item-divider">
             <p style="margin-top: 5%; float:left">{{challenge.name}}</p>
-            <a class="button button-icon ion-ios-plus-outline" icon-off="ion-ios-plus-outline" icon-on="ion-ios-checkmark"  data-state="off" ng-click="activateChallenge(challenge.c_id)" icon-switcher></a>
+            <a class="button button-icon ion-ios-plus-outline" icon-off="ion-ios-plus-outline" icon-on="ion-ios-checkmark"  data-state="off" ng-model="challenge.iconOn" ng-click="activateChallenge(challenge.c_id)" icon-switcher></a>
             <!--<div ng-class="{'ion-ios-checkmark': isActive(challenge.id), 'ion-ios-plus-outline': !isActive(challenge.id)}">{{isActive}}</div>-->
             <!--<a class="button button-icon ion-ios-checkmark-outline" ng-click="activateChallenge()"></a>-->
             <!--ng-class="{'ion-ios-checkmark': isActive(challenge.id), 'ion-ios-plus-outline': !isActive(challenge.id)}"-->
