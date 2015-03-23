@@ -2,7 +2,7 @@
 <form name="submitForm" novalidate>
   <p>Submit to:</p>
 
-    <select ng-controller="WinsCtrl" >
+    <select ng-controller="NewPhotoCtrl" >
       <option> Choose the Challenge</option>
       <option ng-repeat="accepted in accepteds">{{accepted.challenge}}</option> <!--| filter: {u_id: u_id}--->
     </select>

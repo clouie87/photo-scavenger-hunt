@@ -42,9 +42,12 @@
 
           <h2 class="item item-divider">
             <p style="margin-top: 5%; float:left">{{challenge.name}}</p>
-            <a class="button button-icon ion-ios-plus-outline" icon-off="ion-ios-plus-outline" icon-on="ion-ios-checkmark" ng-click="activateChallenge(challenge.c_id)" icon-switcher></a>
+            <a class="button button-icon ion-ios-plus-outline" icon-off="ion-ios-plus-outline" icon-on="ion-ios-checkmark"  data-state="off" ng-click="activateChallenge(challenge.c_id)" icon-switcher></a>
+            <!--<div ng-class="{'ion-ios-checkmark': isActive(challenge.id), 'ion-ios-plus-outline': !isActive(challenge.id)}">{{isActive}}</div>-->
             <!--<a class="button button-icon ion-ios-checkmark-outline" ng-click="activateChallenge()"></a>-->
+            <!--ng-class="{'ion-ios-checkmark': isActive(challenge.id), 'ion-ios-plus-outline': !isActive(challenge.id)}"-->
           <!--<ion-option-button icon-off="ion-ios-plus-outline" icon-on="ion-ios-plus"></ion-option-button>-->
+            <!--ng-attr-class="{{isActive && 'icon-on' || 'icon-off'}}"-->
           </h2>
 
           <div class="item item-image" >

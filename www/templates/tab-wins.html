@@ -5,37 +5,32 @@
 
 
   <ion-content>
-      <div>
-        <select>
-          <option>Choose the Challenge</option>
-          <option ng-repeat="accepted in accepteds">{{accepted.challenge}}</option> <!--| filter: {u_id: u_id}--->
-        </select>
-      </div>
-      <!--<ion-item class="list" ng-controller="ChallengeCtrl" ng-repeat="challenge in challenges" type="item-text-wrap" >-->
 
-        <!--<div class="item item-divider">-->
-          <!--<h2>{{challenge.name}}</h2>-->
-        <!--</div>-->
-      <!--</ion-item>-->
+      <ion-item class="list" ng-controller="ChallengeCtrl" ng-repeat="challenge in challenges" type="item-text-wrap" >
 
-        <!--<ion-item class="list card" style="padding: 3px !important" ng-controller="WinsCtrl" ng-repeat="photo in photos" type="item-text-wrap" href="#/tab/photo/{{photo.id}}" >-->
+        <div class="item item-divider">
+          <h2>{{challenge.name}}</h2>
+        </div>
+      </ion-item>
 
-            <!--<div class="item item-divider">-->
-                <!--<h2>{{photo.description}}</h2>-->
-                <!--&lt;!&ndash;<p>Nine Inch Nails</p>&ndash;&gt;-->
-            <!--</div>-->
+        <ion-item class="list card" style="padding: 3px !important" ng-controller="WinsCtrl" ng-repeat="photo in photos" type="item-text-wrap" href="#/tab/photo/{{photo.id}}" >
 
-            <!--<div class="item item-image">-->
-                <!--<img src="http://clouie.ca/{{photo.filepath}}">-->
-            <!--</div>-->
+            <div class="item item-divider">
+                <h2>{{photo.description}}</h2>
+                <!--<p>Nine Inch Nails</p>-->
+            </div>
+
+            <div class="item item-image">
+                <img src="http://clouie.ca/{{photo.filepath}}">
+            </div>
 
 
-            <!--<div class="item item-divider">-->
-                <!--<i class="icon ion-ios-star">  {{photo.id}}</i>-->
-                <!--&lt;!&ndash;this will become photo.stars&ndash;&gt;-->
+            <div class="item item-divider">
+                <i class="icon ion-ios-star">  {{photo.id}}</i>
+                <!--this will become photo.stars-->
 
-                <!--&lt;!&ndash;<p>Nine Inch Nails</p>&ndash;&gt;-->
-            <!--</div>-->
+                <!--<p>Nine Inch Nails</p>-->
+            </div>
 
 
 
@@ -50,8 +45,8 @@
 
             <!--<div class="item item-thumbnail" style="padding: 0">-->
                 <!--<img class="thumbnail" ng-src="http://clouie.ca/{{photo.filepath}}"/>-->
-                <!--<!--<div>{{photo.id}} photo.id</div>-->
-            <!--</div>-->
+                <!--<div>{{photo.id}} photo.id</div>
+            </div>-->
 
         </ion-item>
     </ion-content>

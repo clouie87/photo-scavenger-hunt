@@ -1,27 +1,47 @@
 angular.module('starter.services', [])
 
+.factory('ActiveChallenges', ['$http', function ActiveChallengesFactory($http){
+    //var currentState = true;
+
+    return {
+
+      all: function () {
+        return $http({
+          method: 'GET',
+          url: 'http://clouie.ca/accepted/'
+        });
+      }
+    }
+
+    //
+
+  }])
+
 .directive('iconSwitcher', function(){
 
   return{
-  restrict: 'A',
     link: function(scope, elem, attrs) {
-      var currentState = true;
+      var currentState = attrs.state;
+      console.log(scope, elem, attrs);
 
       elem.on('click', function () {
         console.log('clicked!');
 
-        if (currentState === true) {
+        if (currentState === 'off') {
           console.log('it is on!');
           angular.element(elem).removeClass(attrs.iconOff);
+          angular.element(elem).data('state', 'on');
           angular.element(elem).addClass(attrs.iconOn);
-        } else {
-          console.log('it is off');
-          angular.element(elem).removeClass(attrs.iconOn);
-          angular.element(elem).addClass(attrs.iconOff);
+        //} else {
+        //  console.log('it is off');
+        //  angular.element(elem).removeClass(attrs.iconOn);
+        //  angular.element(elem).data('state', 'off');
+        //  angular.element(elem).addClass(attrs.iconOff);
 
         }
         currentState = !currentState;
       })
+
     }
   }
 })

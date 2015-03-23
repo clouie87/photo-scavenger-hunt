@@ -101,6 +101,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
     .state('tab.challenge-new', {
       url: '/photo/camera',
+      reload: true,
+      reloadOnSearch: true,
       views: {
         'tab-photo': {
           templateUrl: 'templates/challenge-new.html',
