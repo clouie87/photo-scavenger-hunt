@@ -76,32 +76,61 @@ angular.module('starter.controllers', ['ngStorage'])
 
 .controller('DashCtrl', ['$scope', '$http', 'Photos', 'Challenges', 'ActiveChallenges', function($scope, $http, Photos, Challenges, ActiveChallenges, u_id) {
     $scope.data={};
+
+    console.log('DashCtrl');
     Photos.all().success(function(data) {
             $scope.photos = data;
             //console.log(req.body.id);
         });
 
       Challenges.all().success(function(data) {
-        $scope.challenges = data;
-      });
+        console.log(data);
 
 
 
-      $scope.isActive= function(c_id){
+          for (var i = 0; i < data.length; i++) {
+            console.log('testing the challenges data', i);
+            //data[i].isActive = $scope.isActive(data[i].c_id);
+            data[i].isActive = false;
+          }
+          $scope.challenges = data;
+          $scope.getActive();
+        console.log($scope.challenges);
+        });
+
+
+      $scope.getActive= function(){
+        console.log('testing the isActive function');
+        //return false;
         //var active= 'off';
+
         ActiveChallenges.all().success(function(challengeData) {
 
           for (var i = 0; i < challengeData.length; i++) {
-            console.log('c_id', challengeData[i].c_id);
-            if (challengeData[i].c_id === c_id) {
-              console.log('switching state');
+            for(var j = 0; j < $scope.challenges.length; j++){
+              console.log('checking the scope challenges data is accepted');
+              //console.log()
+              if (challengeData[i].c_id === $scope.challenges[j].c_id) {
 
-              return true;
+                $scope.challenges[j].isActive = true;
+              }
             }
+          //  console.log('c_id', challengeData[i].c_id);
+          //  if (challengeData[i].c_id === c_id) {
+          //    console.log('switching state');
+          //    return true;
+          //  }
           }
-          return false;
+          setTimeout(function () {
+
+            $scope.$apply();
+
+          }, 100);
+          //return false;
         });
+
       };
+
 
       $scope.activateChallenge= function(c_id){
         console.log("the user id is", u_id);

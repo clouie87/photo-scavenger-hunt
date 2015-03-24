@@ -22,10 +22,23 @@ $dark:                            #444 !default;
 .selected{
   background: orange;
 }
+
 .button.button-icon{
   float:right;
   font-size: 30px;
   color: green;
+}
+
+.button.button-icon.ion-ios-star-outline{
+  float:left;
+  color:yellow;
+  text-shadow: 1px 1px 1px grey;
+}
+
+.button.button-icon.ion-ios-star{
+  float:right;
+  color:yellow;
+  text-shadow: 1px 1px 1px grey;
 }
 
 .center{
