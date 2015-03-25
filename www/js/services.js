@@ -10,6 +10,9 @@ angular.module('starter.services', [])
           method: 'GET',
           url: 'http://clouie.ca/accepted/'
         });
+      },
+      isActive: function(c_id){
+
       }
     }
 
@@ -22,7 +25,7 @@ angular.module('starter.services', [])
   return{
     link: function(scope, elem, attrs) {
       var currentState = attrs.state;
-      console.log(scope, elem, attrs);
+      //console.log(scope, elem, attrs);
 
       elem.on('click', function () {
         console.log('clicked!');
@@ -163,9 +166,6 @@ angular.module('starter.services', [])
         url: 'http://clouie.ca/challenge/'
       });
     }
-    //get: function () {
-    //  return users[userId];
-    //}
   }
   //  get: function(u_id) {
   //   for(var i = 0; user < object.length; ++user){
@@ -202,6 +202,42 @@ angular.module('starter.services', [])
         });
       }
     }
+  }])
+
+  .factory('Votes', ['$http', function VotesFactory($http) {
+    // Might use a resource here that returns a JSON array
+    var votes={};
+    return {
+      all: function () {
+        return $http({
+          method: 'GET',
+          url: 'http://clouie.ca/vote/'
+        })
+      },
+
+        get: function(voteID){
+          return $http({
+            method:'GET',
+            url: 'http://clouie.ca/vote/25'
+          })
+          for (var i = 0; i < votes.length; i++) {
+            if (votes[i].id === parseInt(voteID)) {
+              return votes[i];
+            }
+          }
+
+        }
+      //},
+      //get: function(votes){
+        //for (var i = 0; i < votes.length; i++) {
+        //  console.log(votes[i].length);
+        //  if (votes[i].id === parseInt(voteID)){
+        //    return votes[i];
+        //  }
+        //return null;
+        //}
+
+      }
   }])
 
 

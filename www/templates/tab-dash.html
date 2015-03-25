@@ -28,7 +28,7 @@
 
 
           <div class="item item-divider">
-            <a class= "button button-icon ion-ios-star-outline" icon-off="ion-ios-star-outline" icon-on="ion-ios-star" data-state="off" like-switcher> {{photo.id}}</a>
+            <a class= "button button-icon ion-ios-star-outline" icon-off="ion-ios-star-outline" icon-on="ion-ios-star" data-state="off" ng-class="{true: 'ion-ios-star-outline', false: 'ion-ios-star'}" ng-click="photo.votecount= photo.votecount+1" like-switcher ng-model="data.vote"><p> {{photo.votecount}}</p></a> <!--addVote(photo.id)-->
             <!--this will become photo.stars-->
 
             <!--<p>Nine Inch Nails</p>-->

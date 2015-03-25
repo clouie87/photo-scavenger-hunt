@@ -4,9 +4,6 @@ angular.module('starter.controllers', ['ngStorage'])
   //console.log('at login Ctrl');
     $("button#logout").hide();
 
-
-
-
     $scope.data = {};
     $scope.localLogin= function(){
       console.log('clicked localLogin');
@@ -17,7 +14,7 @@ angular.module('starter.controllers', ['ngStorage'])
       if (result.data.status == true) {
 
           //successful login, in our example, we will just send an alert message
-            alert("Congrats, you logged in with user ID "+result.data.user_id);
+          //  alert("Congrats, you logged in with user ID "+result.data.user_id);
 
             $state.go('tab.dash');
             $("button#logout").show();
@@ -74,22 +71,33 @@ angular.module('starter.controllers', ['ngStorage'])
     }
   }])
 
-.controller('DashCtrl', ['$scope', '$http', 'Photos', 'Challenges', 'ActiveChallenges', function($scope, $http, Photos, Challenges, ActiveChallenges, u_id) {
+.controller('DashCtrl', ['$scope', '$http', 'Photos', 'Challenges', 'ActiveChallenges', 'Votes', function($scope, $http, Photos, Challenges, ActiveChallenges, Votes, u_id) {
     $scope.data={};
 
     console.log('DashCtrl');
     Photos.all().success(function(data) {
-            $scope.photos = data;
-            //console.log(req.body.id);
+      $scope.photos = data;
+      console.log('the array of photo objects are', data);
         });
 
-      Challenges.all().success(function(data) {
+    //$scope.addVote=function(){
+    //  console.log($scope.photos);
+    //  //$scope.photos = $scope.photos +1;
+    //  console.log('the add vote data is', $scope.photos);
+    //  var data = {
+    //    'p_id':id
+    //  };
+    //  console.log('vote was clicked', data);
+    //  $http({method: 'POST', url: 'http://clouie.ca/vote', withCredentials: true, data: data});
+    //  console.log('posting the c_id data', data);
+    //}
+
+
+    Challenges.all().success(function(data) {
         console.log(data);
 
-
-
           for (var i = 0; i < data.length; i++) {
-            console.log('testing the challenges data', i);
+            //console.log('testing the challenges data', i);
             //data[i].isActive = $scope.isActive(data[i].c_id);
             data[i].isActive = false;
           }
@@ -115,48 +123,28 @@ angular.module('starter.controllers', ['ngStorage'])
                 $scope.challenges[j].isActive = true;
               }
             }
-          //  console.log('c_id', challengeData[i].c_id);
-          //  if (challengeData[i].c_id === c_id) {
-          //    console.log('switching state');
-          //    return true;
-          //  }
           }
           setTimeout(function () {
 
             $scope.$apply();
 
           }, 100);
-          //return false;
+
         });
 
       };
 
 
-      $scope.activateChallenge= function(c_id){
+      $scope.activateChallenge= function(c_id) {
         console.log("the user id is", u_id);
         var data = {
           'c_id': c_id
         };
         console.log("the add Challenge button was clicked");
 
-        //ActiveChallenges.all().success(function(challengeData) {
-        //  $scope.toggles = false;
-        //
-        //  for (var i = 0; i < challengeData.length; i++) {
-        //    console.log('c_id', challengeData[i].c_id);
-        //    if (challengeData[i].c_id === c_id) {
-        //      $scope.toggles = true;
-        //      //return true;
-        //    }
-        //  }
-        //});
-
-
-
-
-        ActiveChallenges.all().success(function(challengeData){
+        ActiveChallenges.all().success(function (challengeData) {
           //console.log('the c_id is:', c_id);
-          console.log(challengeData);
+          //console.log(challengeData);
           //console.log(u_id);
           console.log(c_id);
           var alreadyAccepted = false;
@@ -164,37 +152,43 @@ angular.module('starter.controllers', ['ngStorage'])
           if (challengeData.length >= 5) {
             console.log('there are more than 5 challenges');
             alert('Sorry you can only have 5 challenges! Please submit a photo to one of your challenges!');
-          } else{
+          } else {
             for (var i = 0; i < challengeData.length; i++) {
               console.log('c_id', challengeData[i].c_id);
               if (challengeData[i].c_id === c_id) {
                 alreadyAccepted = true;
               }
             }
-            if(!alreadyAccepted){
-                  $http({method: 'POST', url: 'http://clouie.ca/accepted', withCredentials: true, data: data});
-                  console.log('posting the c_id data');
+            if (!alreadyAccepted) {
+              $http({method: 'POST', url: 'http://clouie.ca/accepted', withCredentials: true, data: data});
+              console.log('posting the c_id data');
 
-                  console.log("this is challenge id", c_id);
-                }
-            else{
-              alert("Sorry you've already accepted this!");
-              }
+              console.log("this is challenge id", c_id);
             }
+            else {
+              alert("Sorry you've already accepted this!");
+            }
+          }
 
           //}
         });
-        //$http({method: 'POST', url: 'http://clouie.ca/accepted', withCredentials: true, data: data});
-        //    console.log('posting the c_id data');
-        //
-        //  console.log("this is challenge id", c_id);
-        }
+      }
 
-//$scope.challenges = Challenges.all();
-//      $scope.remove = function(challenge) {
-//        Chats.remove(challenge);
-//      }
-    console.log($scope.data);
+    $scope.addVote=function(id){
+      $scope.vote = $scope.vote +1;
+      var data = {
+        'p_id': id
+      };
+      console.log('vote was clicked', data);
+      $http({method: 'POST', url: 'http://clouie.ca/vote', withCredentials: true, data: data});
+      console.log('posting the c_id data');
+      setTimeout(function () {
+
+        $scope.$apply();
+
+      }, 100);
+    }
+
     }])
 
 
@@ -395,13 +389,14 @@ angular.module('starter.controllers', ['ngStorage'])
       options.fileName = "camera.jpeg";
       options.mimeType = "image/jpeg";
       options.headers = {"Access-Control-Allow-Credentials": "true"};
-      alert('we got this far');
+      alert($rootScope.data.challenge);
+
       //options.chunkedMode = false;
       var params = {
-        name: $rootScope.challenge.name,
+        name: $rootScope.data.challenge,
         description: $rootScope.data.description,
         album_id: 1,
-        c_id: $rootScope.data.selectedChallenge,
+        c_id: $rootScope.data.challenge,
         filename: 'camera.jpeg'
       };
       //alert(params.description);

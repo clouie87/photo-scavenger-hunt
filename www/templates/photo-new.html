@@ -2,13 +2,13 @@
 <form name="submitForm" novalidate>
   <p>Submit to:</p>
 
-    <select ng-controller="NewPhotoCtrl" >
+    <select ng-controller="NewPhotoCtrl" ng-model="data.challenge">
       <option> Choose the Challenge</option>
-      <option ng-repeat="accepted in accepteds">{{accepted.challenge}}</option> <!--| filter: {u_id: u_id}--->
+      <option ng-repeat="accepted in accepteds" value="{{accepted.c_id}}">{{accepted.challenge}}</option> <!--| filter: {u_id: u_id}--->
     </select>
 
     <br></br>
-  <p>the challenge id is: {{challenge.c_id}}</p>
+  <p>the challenge id is: {{data.challenge}}</p>
   <!--<input type="hidden" name="c_id" value={{c_id}}>-->
   <p> <image ng-src="{{data.imageURI}}" style="width:100px; height:100px"  /></p>
 
