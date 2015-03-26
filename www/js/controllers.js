@@ -76,34 +76,27 @@ angular.module('starter.controllers', ['ngStorage'])
 
     console.log('DashCtrl');
 
-
-    //  $scope.votes = data;
-    //  console.log('ths scope of the votes are ', $scope.votes);
-    //  $scope.votes = Votes.check(data);
-    //  console.log(data);
-    //});
-
     Photos.all().success(function(data) {
       $scope.photos = data;
       console.log('the array of photo objects are', data);
       var votes = $scope.votes;
       //$scope.photos = Photos.check(data, votes);
 
+
       Votes.all().success(function(voteData) {
           $scope.votes = Votes.check(voteData);
-          console.log(voteData);
+          console.log('the photo data ', voteData);
+          Photos.getVoted(data, voteData);
+            console.log('the data is', data, 'and the vote data', voteData);
+
       });
 
       $scope.addVote=function(id){
         Votes.save(id).success(function(data){
-          //$scope.photos = data;
           console.log('saving the vote')
         })
       }
     });
-
-
-
 
     Challenges.all().success(function(data) {
         console.log(data);

@@ -237,9 +237,7 @@ angular.module('starter.services', [])
         console.log('in the check function');
         for (var i = 0; i < voteData.length; i++) {
           console.log('testing the challenges data', i);
-          //data[i].isActive = $scope.isActive(data[i].c_id);
           voteData[i].hasVoted = true;
-          //return data;
         }
         return voteData;
 
@@ -256,9 +254,17 @@ angular.module('starter.services', [])
         method:'GET',
         url:'http://clouie.ca/photo/'
       });
-
-      //$http({method: 'POST', url: 'http://clouie.ca/vote', withCredentials: true, data: data});
-      //console.log('posting the c_id data');
+    },
+    getVoted: function(data, voteData){
+      for(var i = 0; i < data.length; i++){
+        data[i].hasVoted= false;
+        console.log(data[i]);
+        for(var j = 0; j < voteData.length; j++){
+          data[j].hasVoted=true;
+          console.log(data[j]);
+        }
+      }
+      //console.log(data, voteData);
     }
     //get: function(photoDescription) {
     //    // Simple index lookup

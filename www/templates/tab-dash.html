@@ -41,9 +41,9 @@
         <ion-item class="list-card" ng-repeat="challenge in challenges" class="uncheckedClass" type="item-text-wrap" href="#/tab/challenge/{{challenge.id}}">
 
           <h2 class="item item-divider">
-            <p style="margin-top: 5%; float:left">{{challenge.name}}</p>
+            <!--<p style="margin-top: 5%; float:left">{{challenge.name}}</p>-->
             <a class="button button-icon" icon-off="ion-ios-plus-outline" icon-on="ion-ios-checkmark" data-state="off" ng-class="{true: 'ion-ios-checkmark', false: 'ion-ios-plus-outline'}[challenge.isActive]" ng-click="activateChallenge(challenge.c_id)" icon-switcher></a>
-            <p>{{challenge.isActive}}</p>
+
             <!--<div ng-class="{'ion-ios-checkmark': isActive(challenge.id), 'ion-ios-plus-outline': !isActive(challenge.id)}">{{isActive}}</div>-->
             <!--<a class="button button-icon ion-ios-checkmark-outline" ng-click="activateChallenge()"></a>-->
             <!--ng-class="{'ion-ios-checkmark': isActive(challenge.id), 'ion-ios-plus-outline': !isActive(challenge.id)}"-->
