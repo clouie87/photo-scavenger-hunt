@@ -28,7 +28,7 @@
 
 
           <div class="item item-divider">
-            <a class= "button button-icon" icon-off="ion-ios-star-outline" icon-on="ion-ios-star" data-state="off" ng-class="{true: 'ion-ios-star', false: 'ion-ios-star-outline'}[photo.hasVoted]" ng-click="addVote(photo.id)" like-switcher><p> {{photo.votecount}}</p></a> <!--addVote(photo.id)--> <!---->
+            <a class= "button button-icon ion-ios-star-outline" icon-off="ion-ios-star-outline" icon-on="ion-ios-star" data-state="off" ng-class="{true: 'ion-ios-star-outline', false: 'ion-ios-star'}" ng-click="addVote(photo.id)" like-switcher ng-model="data.vote"><p> {{photo.votecount}}</p></a> <!--addVote(photo.id)-->
             <!--this will become photo.stars-->
 
             <!--<p>Nine Inch Nails</p>-->
@@ -37,7 +37,7 @@
 
       </div>
 
-      <div  ng-show="tab === 2">
+      <div ng-show="tab === 2">
         <ion-item class="list-card" ng-repeat="challenge in challenges" class="uncheckedClass" type="item-text-wrap" href="#/tab/challenge/{{challenge.id}}">
 
           <h2 class="item item-divider">

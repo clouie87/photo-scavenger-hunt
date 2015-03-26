@@ -26,6 +26,11 @@ $dark:                            #444 !default;
   font-size: 30px;
   color: green; }
 
+.star.button.button-icon {
+  float: right;
+  font-size: 30px;
+  color: #ffff00; }
+
 .button.button-icon.ion-ios-star-outline {
   float: left;
   color: yellow;

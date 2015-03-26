@@ -75,65 +75,49 @@ angular.module('starter.controllers', ['ngStorage'])
     $scope.data={};
 
     console.log('DashCtrl');
+
+
+    //  $scope.votes = data;
+    //  console.log('ths scope of the votes are ', $scope.votes);
+    //  $scope.votes = Votes.check(data);
+    //  console.log(data);
+    //});
+
     Photos.all().success(function(data) {
       $scope.photos = data;
       console.log('the array of photo objects are', data);
-        });
+      var votes = $scope.votes;
+      //$scope.photos = Photos.check(data, votes);
 
-    //$scope.addVote=function(){
-    //  console.log($scope.photos);
-    //  //$scope.photos = $scope.photos +1;
-    //  console.log('the add vote data is', $scope.photos);
-    //  var data = {
-    //    'p_id':id
-    //  };
-    //  console.log('vote was clicked', data);
-    //  $http({method: 'POST', url: 'http://clouie.ca/vote', withCredentials: true, data: data});
-    //  console.log('posting the c_id data', data);
-    //}
+      Votes.all().success(function(voteData) {
+          $scope.votes = Votes.check(voteData);
+          console.log(voteData);
+      });
+
+      $scope.addVote=function(id){
+        Votes.save(id).success(function(data){
+          //$scope.photos = data;
+          console.log('saving the vote')
+        })
+      }
+    });
+
+
 
 
     Challenges.all().success(function(data) {
         console.log(data);
-
-          for (var i = 0; i < data.length; i++) {
-            //console.log('testing the challenges data', i);
-            //data[i].isActive = $scope.isActive(data[i].c_id);
-            data[i].isActive = false;
-          }
-          $scope.challenges = data;
-          $scope.getActive();
-        console.log($scope.challenges);
+        $scope.challenges = Challenges.check(data);
+          console.log($scope.challenges);
+          var challengeData = $scope.challenges;
+        ActiveChallenges.all().success(function(data) {
+          console.log('the data and challenge data', data, challengeData);
+          Challenges.getActive(challengeData, data);
+          console.log('the returning data from the getActive function is ', challengeData);
+          $scope.challenges = challengeData;
         });
 
-
-      $scope.getActive= function(){
-        console.log('testing the isActive function');
-        //return false;
-        //var active= 'off';
-
-        ActiveChallenges.all().success(function(challengeData) {
-
-          for (var i = 0; i < challengeData.length; i++) {
-            for(var j = 0; j < $scope.challenges.length; j++){
-              console.log('checking the scope challenges data is accepted');
-              //console.log()
-              if (challengeData[i].c_id === $scope.challenges[j].c_id) {
-
-                $scope.challenges[j].isActive = true;
-              }
-            }
-          }
-          setTimeout(function () {
-
-            $scope.$apply();
-
-          }, 100);
-
-        });
-
-      };
-
+    });
 
       $scope.activateChallenge= function(c_id) {
         console.log("the user id is", u_id);
@@ -172,27 +156,10 @@ angular.module('starter.controllers', ['ngStorage'])
 
           //}
         });
-      }
-
-    $scope.addVote=function(id){
-      $scope.vote = $scope.vote +1;
-      var data = {
-        'p_id': id
       };
-      console.log('vote was clicked', data);
-      $http({method: 'POST', url: 'http://clouie.ca/vote', withCredentials: true, data: data});
-      console.log('posting the c_id data');
-      setTimeout(function () {
 
-        $scope.$apply();
-
-      }, 100);
-    }
 
     }])
-
-
-
 
 .controller('CompeteCtrl', function($scope, Challenges) {
   $scope.challenges = Challenges.all();

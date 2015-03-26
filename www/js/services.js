@@ -159,37 +159,43 @@ angular.module('starter.services', [])
 
 .factory('Challenges', ['$http', function ChallengesFactory($http) {
   // Might use a resource here that returns a JSON array
+  var challenges ={};
   return {
     all: function () {
       return $http({
         method: 'GET',
         url: 'http://clouie.ca/challenge/'
       });
+
+    },
+    check: function (data) {
+        for (var i = 0; i < data.length; i++) {
+          console.log('testing the challenges data');
+          data[i].isActive = false;
+        }
+      return data;
+
+    },
+    getActive: function(challengeData, data){
+      console.log('in the active function');
+      for (var i = 0; i < data.length; i++) {
+      //console.log(challengeData[i]);
+        for(var j=0; j< challengeData.length; j++){
+          if (data[i].c_id === challengeData[j].c_id) {
+            console.log('the challenge ids match between the ActiveChallenges and all challenges for this user', challengeData[j].u_id);
+            console.log('these challenges are already active', challengeData[j].c_id);
+
+            challengeData[j].isActive = true;
+            console.log(challengeData);
+          }
+        }
+      }
+
+      return challengeData;
+
     }
   }
-  //  get: function(u_id) {
-  //   for(var i = 0; user < object.length; ++user){
-  //    //console.log(object[user]);
-  //    if(object[user].u_id === u_id){
-  //      console.log(object[user]);
-  //      //data = object[user];
-  //      $scope.challenges = object[user];
-  //    }
-  //  }
-  //};
-  //  },
-  //  remove: function(challenge) {
-  //    challenges.splice(challenges.indexOf(challenge), 1);
-  //  },
-  //  get: function(challengeID) {
-  //    for (var i = 0; i < challenges.length; i++) {
-  //      if (challenges[i].id === parseInt(challengeID)) {
-  //        return challenges[i];
-  //      }
-  //    }
-  //    return null;
-  //  }
-  //};
+
 }])
 
   .factory('Accepteds', ['$http', function AcceptedsFactory($http) {
@@ -206,7 +212,7 @@ angular.module('starter.services', [])
 
   .factory('Votes', ['$http', function VotesFactory($http) {
     // Might use a resource here that returns a JSON array
-    var votes={};
+
     return {
       all: function () {
         return $http({
@@ -215,29 +221,30 @@ angular.module('starter.services', [])
         })
       },
 
-        get: function(voteID){
-          return $http({
-            method:'GET',
-            url: 'http://clouie.ca/vote/25'
-          })
-          for (var i = 0; i < votes.length; i++) {
-            if (votes[i].id === parseInt(voteID)) {
-              return votes[i];
-            }
-          }
+      save: function (id) {
+        var data = {
+          'p_id': id
+        };
+        console.log('vote was clicked', data);
+        return $http({
+          method: 'POST',
+          url: 'http://clouie.ca/vote',
+          data: data
+        });
+      },
 
+      check: function(voteData){
+        console.log('in the check function');
+        for (var i = 0; i < voteData.length; i++) {
+          console.log('testing the challenges data', i);
+          //data[i].isActive = $scope.isActive(data[i].c_id);
+          voteData[i].hasVoted = true;
+          //return data;
         }
-      //},
-      //get: function(votes){
-        //for (var i = 0; i < votes.length; i++) {
-        //  console.log(votes[i].length);
-        //  if (votes[i].id === parseInt(voteID)){
-        //    return votes[i];
-        //  }
-        //return null;
-        //}
+        return voteData;
 
       }
+    }
   }])
 
 
@@ -249,6 +256,9 @@ angular.module('starter.services', [])
         method:'GET',
         url:'http://clouie.ca/photo/'
       });
+
+      //$http({method: 'POST', url: 'http://clouie.ca/vote', withCredentials: true, data: data});
+      //console.log('posting the c_id data');
     }
     //get: function(photoDescription) {
     //    // Simple index lookup
