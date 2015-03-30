@@ -50,6 +50,18 @@ $dark:                            #444 !default;
   margin: auto;
 }
 
+.item-radio input:checked ~ .item-content{
+  background-color: rgba(142, 245, 142, 0.69) !important;
+  color: green;
+//  text-shadow: 1px 1px 1px green;
+
+}
+
+.radio-icon.ion-checkmark{
+  color: green;
+  text-shadow: 1px 1px 1px #A6EFB8;
+}
+
 .item-content{
   margin-left: 3%;
 }
@@ -66,6 +78,24 @@ h2.textOnImage.ng-binding{
   color:whitesmoke;
   margin-top: 10%;
   margin-left: 15%;
+  margin-right: 15%;
+  font-size: 24px;
+
+
+  position:absolute;
+  max-width: 80%;
+  text-wrap: normal;
+  overflow: auto;
+  text-overflow: clip;
+  white-space: normal;
+}
+
+h2.textOnImage2.ng-binding{
+  font-family: awesome;
+  color:whitesmoke;
+  bottom: 0;
+  margin-bottom: 10%;
+  margin-left: 18%;
   margin-right: 15%;
   font-size: 24px;
 

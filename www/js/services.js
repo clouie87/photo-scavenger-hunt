@@ -157,7 +157,7 @@ angular.module('starter.services', [])
   };
 })
 
-.factory('Challenges', ['$http', function ChallengesFactory($http) {
+.factory('Challenges', ['$http', '$timeout', function ChallengesFactory($http, $timeout) {
   // Might use a resource here that returns a JSON array
   var challenges ={};
   return {
@@ -168,6 +168,77 @@ angular.module('starter.services', [])
       });
 
     },
+    timer: function(data){
+      var timerData = [];
+      for (var i= 0; i < data.length; i++){
+        //console.log('checking the time remaining');
+        var dateCreated = Date.parse(data[i].created_on);
+        var todayDate = Date.now();
+        var difference = todayDate - dateCreated;
+        //console.log(dateCreated);
+        //console.log(todayDate);
+        //console.log(difference);
+
+        //var dateDifference;
+        //console.log(dateDifference);
+        //var hour = dateDifference.getHours();
+        //var minute = dateDifference.getMinutes();
+        //var day = dateDifference.getDate();
+        //console.log('the minute difference is:', minute);
+        //console.log('the days difference is:', day);
+        //console.log('the hours difference is:', hour);
+        if (difference >= 681216000){
+          //console.log('these challenges are done: ', data[i].name);
+          data[i].isOver = true;
+          data[i].day = "Challenge is Over";
+        }
+      else{
+          console.log(difference);
+          //difference--;
+          //console.log(difference);
+
+          data[i].difference = difference;
+          //var dateDifference = new Date(difference);
+
+          var differenceSeconds = (difference/1000)%60;
+          var differenceMinutes = (difference/(1000*60))%60;
+          var differenceHours = (difference/(1000*60*60))%24;
+          var differenceDays = (difference/(1000*60*60*24));
+
+          data[i].day = differenceDays;
+          data[i].hours = differenceHours;
+          data[i].minutes = differenceMinutes;
+          data[i].seconds = differenceSeconds;
+
+          data[i].isOver = false;
+        }
+      }
+      return timerData;
+
+    },
+
+    //timeout: function(timerData){
+    //  console.log('the time out is running');
+    //  var counter = [];
+    //  for(var i = 0; i < timerData.length; i++) {
+    //
+    //      if (timerData[i].isOver === false) {
+    //        this.counter = timerData[i];
+    //        console.log('the counter is set to ', this.counter);
+    //
+    //        this.counter--;
+    //        console.log(this.counter);
+    //
+    //      }
+    //
+    //    }
+    //    return timerData;
+    //
+    //    //return counter;
+    //
+    //
+    //},
+
     check: function (data) {
         for (var i = 0; i < data.length; i++) {
           console.log('testing the challenges data');
@@ -176,6 +247,7 @@ angular.module('starter.services', [])
       return data;
 
     },
+
     getActive: function(challengeData, data){
       console.log('in the active function');
       for (var i = 0; i < data.length; i++) {
@@ -255,21 +327,28 @@ angular.module('starter.services', [])
         url:'http://clouie.ca/photo/'
       });
     },
-    getVoted: function(data, voteData){
-      for(var i = 0; i < data.length; i++){
-        data[i].hasVoted= false;
-        console.log(data[i]);
-        for(var j = 0; j < voteData.length; j++){
-          data[j].hasVoted=true;
-          console.log(data[j]);
-        }
+    check: function(challengeID) {
+        return $http({
+          method: 'GET',
+          url: 'http://clouie.ca/photo/' + challengeID
+        });
       }
+    //getVoted: function(data, voteData) {
+    //  for (var i = 0; i < data.length; i++) {
+    //    data[i].hasVoted = false;
+    //    console.log(data[i]);
+    //    for (var j = 0; j < voteData.length; j++) {
+    //      data[j].hasVoted = true;
+    //      console.log(data[j]);
+    //    }
+    //  }
+    //}
+
       //console.log(data, voteData);
-    }
     //get: function(photoDescription) {
     //    // Simple index lookup
     //    return photos[photoDescription];
     //}
-  };
+  }
 
 }]);

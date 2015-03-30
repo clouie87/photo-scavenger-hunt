@@ -65,6 +65,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       }
   })
 
+    .state('tab.challenge-detail', {
+      url: '/dash/:challengeID',
+      views: {
+        'tab-dash': {
+          templateUrl: 'templates/challenge-detail.html',
+          controller: 'ChallengeDetailCtrl'
+        }
+      }
+    })
+
 
   .state('tab.compete', {
       url: '/compete',

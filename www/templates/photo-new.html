@@ -2,20 +2,16 @@
 <form name="submitForm" novalidate>
   <p>Submit to:</p>
 
-    <select ng-controller="NewPhotoCtrl" ng-model="data.challenge">
-      <option> Choose the Challenge</option>
-      <option ng-repeat="accepted in accepteds" value="{{accepted.c_id}}">{{accepted.challenge}}</option> <!--| filter: {u_id: u_id}--->
-    </select>
+  <div class="list" ng-controller="NewPhotoCtrl" >
 
-    <br></br>
-  <!--<p>the challenge id is: {{data.challenge}}</p>-->
-  <!--<input type="hidden" name="c_id" value={{c_id}}>-->
-  <p> <image ng-src="{{data.imageURI}}" style="width:100px; height:100px"  /></p>
-
-
-  <!--<p> <image ng-src="{{data.imageURI}}" style="width:100px; height:100px"  /></p>-->
-    <!--<p>Photo: <input type="file" name="photo"></p>-->
-    <!--<image ng-src="{{imageURI}}" style="width:100px;height:100px;" />-->
+    <label class="item item-radio" ng-repeat="accepted in accepteds">
+      <input type="radio" name="group" ng-model="data.challenge" value="{{accepted.c_id}}">
+      <div class="item-content">
+        {{accepted.challenge}}
+      </div>
+      <i class="radio-icon ion-checkmark"></i>
+    </label>
+</div>
     <p>Description: <input type="text" ng-model="data.description" name="description"></p>
     <input type="hidden" name="album_id" value="1">
     <p class="row">

@@ -39,13 +39,13 @@ angular.module('starter.controllers', ['ngStorage'])
       console.log('clicked localSignup');
       //Users.create({ email: $scope.data.email, password: $scope.data.password }).then(function(result){
       $http.post("http://clouie.ca/signup", { email: $scope.data.email, password: $scope.data.password }).then(function(result) {
-        alert('sent to signup post request');
+        //alert('sent to signup post request');
           console.log(result);
 
           if (result.data.status == true) {
       //
       //      //successful login, in our example, we will just send an alert message
-            alert("Congrats, you've signed up! Your usesr ID is: " + result.data.user_id);
+      //      alert("Congrats, you've signed up! Your usesr ID is: " + result.data.user_id);
             $state.go('tab.dash');
             var u_id = result.data.user_id;
             console.log(u_id);
@@ -65,51 +65,86 @@ angular.module('starter.controllers', ['ngStorage'])
       console.log('clicked facebookLogin');
       //Users.create({ email: $scope.data.email, password: $scope.data.password }).then(function(result){
       $http.post("http://clouie.ca/auth/facebook", {email: $scope.data.email}).then(function (result) {
-        alert('sent to signup post request');
+        //alert('sent to signup post request');
         console.log(result);
       })
     }
   }])
 
-.controller('DashCtrl', ['$scope', '$http', 'Photos', 'Challenges', 'ActiveChallenges', 'Votes', function($scope, $http, Photos, Challenges, ActiveChallenges, Votes, u_id) {
+.controller('DashCtrl', ['$scope', '$http', '$timeout', 'Photos', 'Challenges', 'ActiveChallenges', 'Votes', function($scope, $http, $timeout, Photos, Challenges, ActiveChallenges, Votes, u_id) {
     $scope.data={};
+
 
     console.log('DashCtrl');
 
-    Photos.all().success(function(data) {
-      $scope.photos = data;
-      console.log('the array of photo objects are', data);
-      var votes = $scope.votes;
-      //$scope.photos = Photos.check(data, votes);
 
-
-      Votes.all().success(function(voteData) {
-          $scope.votes = Votes.check(voteData);
-          console.log('the photo data ', voteData);
-          Photos.getVoted(data, voteData);
-            console.log('the data is', data, 'and the vote data', voteData);
-
-      });
-
-      $scope.addVote=function(id){
-        Votes.save(id).success(function(data){
-          console.log('saving the vote')
-        })
-      }
-    });
 
     Challenges.all().success(function(data) {
-        console.log(data);
+        //console.log(data);
         $scope.challenges = Challenges.check(data);
           console.log($scope.challenges);
           var challengeData = $scope.challenges;
         ActiveChallenges.all().success(function(data) {
           console.log('the data and challenge data', data, challengeData);
           Challenges.getActive(challengeData, data);
-          console.log('the returning data from the getActive function is ', challengeData);
+          //console.log('the returning data from the getActive function is ', challengeData);
           $scope.challenges = challengeData;
         });
 
+        var timerData = data;
+
+      setInterval(function(){
+        console.log(timerData);
+        Challenges.timer(timerData);
+        console.log(timerData);
+        console.log('the scope counter is set in seconds to', timerData);
+        console.log('scope minutes', timerData[0].minutes);
+        console.log('scope second', timerData[0].seconds);
+        console.log('scope day', timerData[0].day);
+
+
+      }, 1000);
+          //console.log(timerData);
+
+
+
+
+      //$scope.counter = timerData[0].second;
+      //      var mytimeout = null; // the current timeoutID
+      // actual timer method, counts down every second, stops on zero
+     // $scope.onTimeout = function() {
+     //   if($scope.counter ===  0) {
+     //     $scope.$broadcast('timer-stopped', 0);
+     //     $timeout.cancel(mytimeout);
+     //     return;
+     //   }
+     //   $scope.counter--;
+     //   mytimeout = $timeout($scope.onTimeout, 1000);
+     // };
+     //$scope.startTimer = function() {
+     //
+     //   mytimeout = $timeout($scope.onTimeout, 1000);
+     //   console.log($scope.counter);
+     // };
+      //// stops and resets the current timer
+      //$scope.stopTimer = function() {
+      //  $scope.$broadcast('timer-stopped', $scope.counter);
+      //  $timeout.cancel(mytimeout);
+      //};
+      //// triggered, when the timer stops, you can do something here, maybe show a visual indicator or vibrate the device
+      //$scope.$on('timer-stopped', function(event, remaining) {
+      //  if(remaining === 0) {
+      //    console.log('your time ran out!');
+      //  }
+      //});
+
+
+        //console.log('the timer data', timerData);
+        //if(timerData.isOver === false) {
+        //  console.log('this is still going on')
+        //}else{
+        //  console.log(timerData.u_id);
+        //}
     });
 
       $scope.activateChallenge= function(c_id) {
@@ -153,6 +188,42 @@ angular.module('starter.controllers', ['ngStorage'])
 
 
     }])
+
+  .controller('ChallengeDetailCtrl', ['$scope', '$stateParams','Photos', 'Votes', function($scope, $stateParams, Photos, Votes) {
+
+      var challengeID = $stateParams.challengeID;
+      console.log('the challenges i want to get are', challengeID);
+
+      Photos.check(challengeID).success(function(data){
+        console.log('the challenge detail ctrl scope for the photos', challengeID);
+        console.log('the data ctrl scope for the photos', data);
+        $scope.photos=data;
+
+        });
+        //console.log(error);
+        //if (error.status= 404) {
+        //  alert("Be the first");
+        //}else {
+        //  $scope.photos = data
+        //}
+
+
+
+      //Votes.all().success(function(voteData) {
+      //  $scope.votes = Votes.check(voteData);
+      //  console.log('the photo data ', voteData);
+      //  Photos.getVoted(data, voteData);
+      //  console.log('the data is', data, 'and the vote data', voteData);
+      //
+      //});
+
+      $scope.addVote=function(id){
+        Votes.save(id).success(function(data){
+          console.log('saving the vote')
+        })
+      }
+    //});
+  }])
 
 .controller('CompeteCtrl', function($scope, Challenges) {
   $scope.challenges = Challenges.all();
@@ -324,52 +395,52 @@ angular.module('starter.controllers', ['ngStorage'])
         var ft = new FileTransfer();
       //alert($http.config);
         ft.upload(imageSave, encodeURI("http://clouie.ca/challenge"), function(result) {
-            alert(result);
+            //alert(result);
           //alert("after saving photo");
         },function(error){
             alert("there was a problem saving your image");
-            alert(error.message);
+            //alert(error.message);
           }, options);
 
     };
 
     $rootScope.saveSubmit = function() {
 
-      alert('saving submit photo');
+      //alert('saving submit photo');
       //alert(JSON.stringify($scope.data));
-      alert(JSON.stringify($rootScope.data));
+      //alert(JSON.stringify($rootScope.data));
       //if($rootScope.data.imageURI.match(/^data:image\/jpeg;base64,/)){
       //  alert('there is a photo');
       //check to see if there was a photo taken
       //post the image to the api
       var imageSave = $rootScope.data.imageURI;
-      alert(imageSave);
+      //alert(imageSave);
       var options = new FileUploadOptions();
       options.fileKey = "photo";
       options.fileName = "camera.jpeg";
       options.mimeType = "image/jpeg";
       options.headers = {"Access-Control-Allow-Credentials": "true"};
-      alert($rootScope.data.challenge);
+      //alert($rootScope.data.challenge);
 
       //options.chunkedMode = false;
       var params = {
-        name: $rootScope.data.challenge,
+        c_id: $rootScope.data.challenge,
         description: $rootScope.data.description,
         album_id: 1,
-        c_id: $rootScope.data.challenge,
+        //c_id: $rootScope.data.challenge,
         filename: 'camera.jpeg'
       };
-      //alert(params.description);
       alert(params.c_id);
+      alert(params.description);
       options.params = params;
       var ft = new FileTransfer();
       //alert($http.config);
       ft.upload(imageSave, encodeURI("http://clouie.ca/photo"), function (result) {
-        alert(result);
+        //alert(result);
         //alert("after saving photo");
       }, function (error) {
         alert("there was a problem saving your image");
-        alert(error.message);
+        //alert(error.message);
       }, options);
       $scope.close = function () {
         //myAddPhoto.deactivate();
@@ -397,6 +468,64 @@ angular.module('starter.controllers', ['ngStorage'])
     });
 
 
+  }])
+
+  .controller('TimerCtrl', ['$scope', '$timeout', 'Challenges', function($scope, $timeout, Challenges) {
+    //Challenges.all().success(function(data) {
+    //
+    //var timerData = data;
+    //
+    //Challenges.timer(timerData);
+    //console.log('the timer data', timerData);
+    //  if(timerData.isOver === false) {
+    //    console.log('this is still going on')
+    //  }else{
+    //    console.log(timerData[0].u_id);
+    //  }
+    //});
+    //
+    //$scope.counter = 42;
+    ////var date= new Date(Date.now());
+    ////var copy = 244494058;;
+    ////copy.setTime(date.getTime());
+    ////copy.setMinutes(date.getMinutes());
+    ////console.log(date);
+    //
+    ////console.log(day);
+    //
+    ////new Date(dateString);
+    //var mytimeout = null; // the current timeoutID
+    //// actual timer method, counts down every second, stops on zero
+    //$scope.onTimeout = function() {
+    //  if($scope.counter ===  0) {
+    //    $scope.$broadcast('timer-stopped', 0);
+    //    $timeout.cancel(mytimeout);
+    //    return;
+    //  }
+    //  $scope.counter--;
+    //  mytimeout = $timeout($scope.onTimeout, 1000);
+    //};
+    //$scope.startTimer = function() {
+    //  console.log(date);
+    //  var day = date.getDate();
+    //  console.log('the day is:', day);
+    //  var minute = date.getMinutes();
+    //  console.log('the minute is:', minute);
+    //  //console.log($scope.startTimer);
+    //  mytimeout = $timeout($scope.onTimeout, 1000);
+    //  console.log($scope.counter);
+    //};
+    //// stops and resets the current timer
+    //$scope.stopTimer = function() {
+    //  $scope.$broadcast('timer-stopped', $scope.counter);
+    //  $timeout.cancel(mytimeout);
+    //};
+    //// triggered, when the timer stops, you can do something here, maybe show a visual indicator or vibrate the device
+    //$scope.$on('timer-stopped', function(event, remaining) {
+    //  if(remaining === 0) {
+    //    console.log('your time ran out!');
+    //  }
+    //});
   }])
 
 .controller('ChallengeCtrl', ['$scope', 'Challenges', '$localStorage', function($scope, Challenges, $localStorage){
