@@ -93,17 +93,22 @@ angular.module('starter.controllers', ['ngStorage'])
 
         var timerData = data;
 
-      setInterval(function(){
-        console.log(timerData);
+
+
+      //setInterval(function(){
+      //  console.log(timerData);
         Challenges.timer(timerData);
-        console.log(timerData);
+      //  console.log(timerData);
+      //$scope.counter = timerData.seconds;
         console.log('the scope counter is set in seconds to', timerData);
         console.log('scope minutes', timerData[0].minutes);
         console.log('scope second', timerData[0].seconds);
         console.log('scope day', timerData[0].day);
-
-
-      }, 1000);
+        //console.log('time in sec', timerData[0].timeInSecs);
+      //  return timerData;
+      //
+      //
+      //}, 1000);
           //console.log(timerData);
 
 

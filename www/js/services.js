@@ -170,50 +170,59 @@ angular.module('starter.services', [])
     },
     timer: function(data){
       var timerData = [];
-      for (var i= 0; i < data.length; i++){
-        //console.log('checking the time remaining');
+      for (var i= 0; i < data.length; i++) {
         var dateCreated = Date.parse(data[i].created_on);
         var todayDate = Date.now();
         var difference = todayDate - dateCreated;
-        //console.log(dateCreated);
-        //console.log(todayDate);
-        //console.log(difference);
+        var timeInSecs = difference;
+        console.log(dateCreated);
+        //var data2 = data[i];
 
-        //var dateDifference;
-        //console.log(dateDifference);
-        //var hour = dateDifference.getHours();
-        //var minute = dateDifference.getMinutes();
-        //var day = dateDifference.getDate();
-        //console.log('the minute difference is:', minute);
-        //console.log('the days difference is:', day);
-        //console.log('the hours difference is:', hour);
-        if (difference >= 681216000){
+        if(difference <= 681216000){
+          //var data[i] = data2;
+          console.log(data[i]);
+          console.log('the difference is', difference);
+
+          var j = parseInt((difference/1000));
+          var interval = setInterval(function (){
+            console.log(j, 'seconds left');
+            j--; // Take one away from i
+            console.log('j', j);
+            //var differenceSeconds = (j) % 60;
+            //data[i].seconds = parseInt(differenceSeconds);
+            console.log('days, ', (j / (60 * 60 * 24)));
+            console.log('hours, ', (j /  (60 * 60)%24));
+            console.log('minutes, ', (j / (60)%60));
+            console.log('seconds, ', (j %60));
+          //
+            if (j === 0) {
+              clearInterval(interval); // Stop the interval
+            }
+            //data[i].seconds = j;
+            console.log('j is now ', j);
+            //console.log('difference is now, ', difference);
+
+
+          }, 10000);
+
+          //var differenceSeconds = (j) % 60;
+          var differenceMinutes = (j / (60)) % 60;
+          var differenceHours = (j / (60 * 60)) % 24;
+          var differenceDays = (j / (60 * 60 * 24));
+
+          data[i].day = parseInt(differenceDays);
+          data[i].hours = parseInt(differenceHours);
+          data[i].minutes = parseInt(differenceMinutes);
+          //data[i].seconds = parseInt(differenceSeconds);
+          data[i].isOver = false;
+        } else{
           //console.log('these challenges are done: ', data[i].name);
           data[i].isOver = true;
           data[i].day = "Challenge is Over";
         }
-      else{
-          console.log(difference);
-          //difference--;
-          //console.log(difference);
-
-          data[i].difference = difference;
-          //var dateDifference = new Date(difference);
-
-          var differenceSeconds = (difference/1000)%60;
-          var differenceMinutes = (difference/(1000*60))%60;
-          var differenceHours = (difference/(1000*60*60))%24;
-          var differenceDays = (difference/(1000*60*60*24));
-
-          data[i].day = differenceDays;
-          data[i].hours = differenceHours;
-          data[i].minutes = differenceMinutes;
-          data[i].seconds = differenceSeconds;
-
-          data[i].isOver = false;
-        }
       }
       return timerData;
+
 
     },
 
