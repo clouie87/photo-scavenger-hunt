@@ -34,6 +34,17 @@ $dark:                            #444 !default;
   color: #ffff00;
 }
 
+.list-inset .item.item-input input{
+  margin-left: 10%;
+  margin-right: 10%;
+  border-bottom: 1px #dddddd solid;
+}
+label.item.item-input {
+
+//  border-top-style: none !important;
+  border: none !important;
+}
+
 .button.button-icon.ion-ios-star-outline{
   float:left;
   color:yellow;

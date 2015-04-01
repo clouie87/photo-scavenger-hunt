@@ -169,59 +169,89 @@ angular.module('starter.services', [])
 
     },
     timer: function(data){
-      var timerData = [];
+      //var data = [];
+      console.log('this is the beginning of my timer function tool: ', data[0]);
+
+      var interval = setInterval(function (){
       for (var i= 0; i < data.length; i++) {
         var dateCreated = Date.parse(data[i].created_on);
         var todayDate = Date.now();
         var difference = todayDate - dateCreated;
-        var timeInSecs = difference;
-        console.log(dateCreated);
+
+        //var dateMade = data[i].created_on;
+        //console.log(dateMade);
+        //var dateNow = Date.now(todayDate);
+        //console.log(dateNow);
+
+        //console.log(todayDate.toDateString());
+        data[i].difference = difference;
         //var data2 = data[i];
 
-        if(difference <= 681216000){
+        if(difference <= 604800000){
           //var data[i] = data2;
-          console.log(data[i]);
-          console.log('the difference is', difference);
+          //console.log(data[i]);
+          //console.log('the difference is', difference);
+          //var differenceDay= (604800/(60*60*24));
+          //console.log('one week is : '+ parseInt(differenceDay));
 
-          var j = parseInt((difference/1000));
-          var interval = setInterval(function (){
-            console.log(j, 'seconds left');
+          var j = ((604800000-difference)/1000);
+
+            //console.log(j, 'seconds left');
             j--; // Take one away from i
-            console.log('j', j);
-            //var differenceSeconds = (j) % 60;
-            //data[i].seconds = parseInt(differenceSeconds);
-            console.log('days, ', (j / (60 * 60 * 24)));
-            console.log('hours, ', (j /  (60 * 60)%24));
-            console.log('minutes, ', (j / (60)%60));
-            console.log('seconds, ', (j %60));
-          //
+            //console.log('j', j);
+            var differenceDays = (j / (60 * 60 * 24));
+            var differenceHours = (j /  (60 * 60)%24);
+            var differenceMinutes = (j / (60)%60);
+            var differenceSeconds = (j) % 60;
+
+            var day = parseInt(differenceDays);
+            var hours = parseInt(differenceHours);
+            var minutes = parseInt(differenceMinutes);
+            var seconds = parseInt(differenceSeconds);
+
+
+            data[i].days = parseInt(differenceDays);
+            data[i].hours = parseInt(differenceHours);
+            data[i].minutes = parseInt(differenceMinutes);
+            data[i].seconds = parseInt(differenceSeconds);
+            if (i == 0) {
+              console.log(data[i].days, ' days ', data[i].hours, ' hours ', data[i].minutes, ' minutes and ', data[i].seconds, ' seconds');
+            }
+
+            //console.log('days, ', (j / (60 * 60 * 24)));
+            //console.log('days, ', day);
+            //console.log('hours, ', hours);
+            //console.log('minutes, ', minutes);
+            //console.log('seconds, ', seconds);
+
             if (j === 0) {
               clearInterval(interval); // Stop the interval
             }
-            //data[i].seconds = j;
-            console.log('j is now ', j);
-            //console.log('difference is now, ', difference);
-
-
-          }, 10000);
-
+          //console.log('the j, ', j);
           //var differenceSeconds = (j) % 60;
-          var differenceMinutes = (j / (60)) % 60;
-          var differenceHours = (j / (60 * 60)) % 24;
-          var differenceDays = (j / (60 * 60 * 24));
-
-          data[i].day = parseInt(differenceDays);
-          data[i].hours = parseInt(differenceHours);
-          data[i].minutes = parseInt(differenceMinutes);
+          //var differenceDays = (j / (60 * 60 * 24));
+          //var differenceHours = (j /  (60 * 60)%24);
+          //var differenceMinutes = (j / (60)%60);
           //data[i].seconds = parseInt(differenceSeconds);
+          //data[i].days = parseInt(differenceDays);
+          //data[i].hours = parseInt(differenceHours);
+          //data[i].minutes = parseInt(differenceMinutes);
+          //var seconds = parseInt(differenceSeconds);
+          //console.log('seconds ', data[i].seconds);
+          //console.log(data[i].days);
+          //console.log(data[i].hours);
+          //console.log(data[i].minutes);
+
           data[i].isOver = false;
         } else{
           //console.log('these challenges are done: ', data[i].name);
           data[i].isOver = true;
           data[i].day = "Challenge is Over";
         }
+
       }
-      return timerData;
+      }, 10000);
+      //return data;
 
 
     },

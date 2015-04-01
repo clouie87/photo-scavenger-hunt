@@ -80,7 +80,7 @@ angular.module('starter.controllers', ['ngStorage'])
 
 
     Challenges.all().success(function(data) {
-        //console.log(data);
+        //var data =[];
         $scope.challenges = Challenges.check(data);
           console.log($scope.challenges);
           var challengeData = $scope.challenges;
@@ -88,22 +88,24 @@ angular.module('starter.controllers', ['ngStorage'])
           console.log('the data and challenge data', data, challengeData);
           Challenges.getActive(challengeData, data);
           //console.log('the returning data from the getActive function is ', challengeData);
-          $scope.challenges = challengeData;
+          //$scope.challenges = challengeData;
         });
 
-        var timerData = data;
 
+        Challenges.timer(data);
+        console.log('the data', data[0]);
+        $scope.challenges = data;
+        //console.log('the new Timer Data', newTimerData[0]);
+        //
 
-
-      //setInterval(function(){
-      //  console.log(timerData);
-        Challenges.timer(timerData);
       //  console.log(timerData);
       //$scope.counter = timerData.seconds;
-        console.log('the scope counter is set in seconds to', timerData);
-        console.log('scope minutes', timerData[0].minutes);
-        console.log('scope second', timerData[0].seconds);
-        console.log('scope day', timerData[0].day);
+      //  console.log('the scope counter is set in seconds to', timerData);
+        //console.log('the new time is ', newTimerData);
+
+        //console.log('scope minutes', newTimerData[0].minutes);
+        //console.log('scope second', newTimerData[0].seconds);
+        //console.log('scope day', newTimerData[0].day);
         //console.log('time in sec', timerData[0].timeInSecs);
       //  return timerData;
       //
