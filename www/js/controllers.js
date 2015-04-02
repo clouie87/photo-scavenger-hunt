@@ -73,6 +73,7 @@ angular.module('starter.controllers', ['ngStorage'])
 
 .controller('DashCtrl', ['$scope', '$http', '$timeout', 'Photos', 'Challenges', 'ActiveChallenges', 'Votes', function($scope, $http, $timeout, Photos, Challenges, ActiveChallenges, Votes, u_id) {
     $scope.data={};
+    //$scope.newData={};
 
 
     console.log('DashCtrl');
@@ -82,7 +83,7 @@ angular.module('starter.controllers', ['ngStorage'])
     Challenges.all().success(function(data) {
         //var data =[];
         $scope.challenges = Challenges.check(data);
-          console.log($scope.challenges);
+          //console.log($scope.challenges);
           var challengeData = $scope.challenges;
         ActiveChallenges.all().success(function(data) {
           console.log('the data and challenge data', data, challengeData);
@@ -91,12 +92,23 @@ angular.module('starter.controllers', ['ngStorage'])
           //$scope.challenges = challengeData;
         });
 
-
+      //var timerData = data;
+      //Challenges.getIsOver(timerData, data);
+      //console.log(timerData);
+      //console.log(data);
+      //$scope.challenges = timerData.isOver(false);
+      setInterval(function () {
         Challenges.timer(data);
-        console.log('the data', data[0]);
+        //console.log('the data', data[0]);
+        console.log('the new data', data[0]);
         $scope.challenges = data;
+
+        $scope.$apply();
+
+      }, 100);
+
         //console.log('the new Timer Data', newTimerData[0]);
-        //
+
 
       //  console.log(timerData);
       //$scope.counter = timerData.seconds;
