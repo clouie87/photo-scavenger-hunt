@@ -75,9 +75,7 @@ angular.module('starter.controllers', ['ngStorage'])
     $scope.data={};
     //$scope.newData={};
 
-
     console.log('DashCtrl');
-
 
 
     Challenges.all().success(function(data) {
@@ -92,11 +90,6 @@ angular.module('starter.controllers', ['ngStorage'])
           //$scope.challenges = challengeData;
         });
 
-      //var timerData = data;
-      //Challenges.getIsOver(timerData, data);
-      //console.log(timerData);
-      //console.log(data);
-      //$scope.challenges = timerData.isOver(false);
       setInterval(function () {
         Challenges.timer(data);
         //console.log('the data', data[0]);
@@ -107,63 +100,6 @@ angular.module('starter.controllers', ['ngStorage'])
 
       }, 100);
 
-        //console.log('the new Timer Data', newTimerData[0]);
-
-
-      //  console.log(timerData);
-      //$scope.counter = timerData.seconds;
-      //  console.log('the scope counter is set in seconds to', timerData);
-        //console.log('the new time is ', newTimerData);
-
-        //console.log('scope minutes', newTimerData[0].minutes);
-        //console.log('scope second', newTimerData[0].seconds);
-        //console.log('scope day', newTimerData[0].day);
-        //console.log('time in sec', timerData[0].timeInSecs);
-      //  return timerData;
-      //
-      //
-      //}, 1000);
-          //console.log(timerData);
-
-
-
-
-      //$scope.counter = timerData[0].second;
-      //      var mytimeout = null; // the current timeoutID
-      // actual timer method, counts down every second, stops on zero
-     // $scope.onTimeout = function() {
-     //   if($scope.counter ===  0) {
-     //     $scope.$broadcast('timer-stopped', 0);
-     //     $timeout.cancel(mytimeout);
-     //     return;
-     //   }
-     //   $scope.counter--;
-     //   mytimeout = $timeout($scope.onTimeout, 1000);
-     // };
-     //$scope.startTimer = function() {
-     //
-     //   mytimeout = $timeout($scope.onTimeout, 1000);
-     //   console.log($scope.counter);
-     // };
-      //// stops and resets the current timer
-      //$scope.stopTimer = function() {
-      //  $scope.$broadcast('timer-stopped', $scope.counter);
-      //  $timeout.cancel(mytimeout);
-      //};
-      //// triggered, when the timer stops, you can do something here, maybe show a visual indicator or vibrate the device
-      //$scope.$on('timer-stopped', function(event, remaining) {
-      //  if(remaining === 0) {
-      //    console.log('your time ran out!');
-      //  }
-      //});
-
-
-        //console.log('the timer data', timerData);
-        //if(timerData.isOver === false) {
-        //  console.log('this is still going on')
-        //}else{
-        //  console.log(timerData.u_id);
-        //}
     });
 
       $scope.activateChallenge= function(c_id) {

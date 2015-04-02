@@ -168,25 +168,7 @@ angular.module('starter.services', [])
       });
 
     },
-    //getIsOver: function(data){
-    //  var timerData = {};
-    //  for(var i = 0; i < data.length; i++) {
-    //    var dateCreated = Date.parse(data[i].created_on);
-    //    var todayDate = Date.now();
-    //    var difference = todayDate - dateCreated;
-    //    console.log(difference);
-    //    if (difference >= 604800000){
-    //      console.log('these challenges are done: ', data[i].name);
-    //      data[i].isOver = true;
-    //      data[i].day = "Challenge is Over";
-    //    }else{
-    //      data[i].isOver = false;
-    //    }
-    //    return timerData;
-    //
-    //  }
-    //
-    //},
+
     timer: function(data){
       var newData = data;
       console.log('this is the beginning of my timer function tool: ', data[0]);
@@ -248,27 +230,7 @@ angular.module('starter.services', [])
 
     },
 
-    //timeout: function(timerData){
-    //  console.log('the time out is running');
-    //  var counter = [];
-    //  for(var i = 0; i < timerData.length; i++) {
-    //
-    //      if (timerData[i].isOver === false) {
-    //        this.counter = timerData[i];
-    //        console.log('the counter is set to ', this.counter);
-    //
-    //        this.counter--;
-    //        console.log(this.counter);
-    //
-    //      }
-    //
-    //    }
-    //    return timerData;
-    //
-    //    //return counter;
-    //
-    //
-    //},
+
 
     check: function (data) {
         for (var i = 0; i < data.length; i++) {
